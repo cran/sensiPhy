@@ -5,7 +5,7 @@
 \title{Influential clade detection - Phylogenetic Logistic Regression}
 \usage{
 clade_phyglm(formula, data, phy, btol = 50, track = TRUE, clade.col,
-  n.species = 5, ...)
+  n.species = 5, times = 100, ...)
 }
 \arguments{
 \item{formula}{The model formula}
@@ -24,6 +24,8 @@ specification (a character vector with clade names).}
 
 \item{n.species}{Minimum number of species in the clade in order to include
 this clade in the leave-one-out deletion analyis. Default is \code{5}.}
+
+\item{times}{Number of simulations for the randomization test.}
 
 \item{...}{Further arguments to be passed to \code{phyloglm}}
 }
@@ -63,12 +65,21 @@ Currently only logistic regression using the "logistic_MPLE"-method from
 difference in intercept and/or slope when removing a given clade compared
 to the full model including all species.
 
+#' Additionally, to account for the influence of the number of species on each 
+clade (clade sample size), this function also estimate a null distribution of slopes
+expected for the number of species in a given clade. This is done by fitting
+ models without the same number of species in the given clade. 
+ The number of simulations to be performed is set by 'times'. To test if the 
+ clade influence differs from the null expectation, a randomization test can
+ be performed using 'summary(x)'. 
+
 Currently, this function can only implement simple linear models (i.e. 
 \eqn{y = a + bx}). In the future we will implement more complex models.
 
 Output can be visualised using \code{sensi_plot}.
 }
 \examples{
+\dontrun{
 # Simulate Data:
 set.seed(6987)
 phy = rtree(150)
@@ -78,7 +89,7 @@ y = rbinTrait(n=1,phy=phy, beta=c(-1,0.5), alpha=.7 ,X=X)
 cla <- rep(c("A","B","C","D","E"), each = 30)
 dat = data.frame(y, x, cla)
 # Run sensitivity analysis:
-clade <- clade_phyglm(y ~ x, phy = phy, data = dat, clade.col = "cla")
+clade <- clade_phyglm(y ~ x, phy = phy, data = dat, times = 30, clade.col = "cla")
 # To check summary results and most influential clades:
 summary(clade)
 # Visual diagnostics for clade removal:
@@ -87,6 +98,7 @@ sensi_plot(clade)
 sensi_plot(clade, "B")
 sensi_plot(clade, "C")
 sensi_plot(clade, "D") #The clade with the largest effect on slope and intercept
+}
 }
 \author{
 Gustavo Paterno & Gijsbert Werner

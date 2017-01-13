@@ -18,7 +18,9 @@
 #' slope or intercept from the full model (with all species). 
 #' 
 #' Graph 2: Original regression plot (\eqn{trait~predictor}). Standardized 
-#' difference in slope or intercept is represented by a continous size scale.
+#' difference in slope or intercept is represented by a continous size scale. 
+#' The names of the most influential species (sDF > cutoff) are ploted in the
+#' graph. 
 #' 
 #' Graph 3: Distribution of standardized difference in slope or intercept. Red 
 #' colour indicates inbfluential species (with a standardised difference above 
@@ -32,9 +34,9 @@
 sensi_plot.sensiInflu <- function(x, graphs="all", param="slope", ...){
 
 # nulling variables:------------------------------------------------------------
-slope <- ..density.. <- intercept <- sDFslope <- slope.perc <- NULL
-intercept.perc <- sDFintercept <- NULL
-
+slope <- ..density.. <- intercept <- sDFslope <- slope.perc <- NULL 
+intercept.perc <- sDFintercept <- species <-  NULL
+        
         ### Organizing values:
         result <- x$influ.model.estimates
         mappx <- x$formula[[3]]
@@ -58,8 +60,8 @@ intercept.perc <- sDFintercept <- NULL
                 geom_vline(xintercept = slope.0,color="red",linetype=2,size=.7)+
                 xlab("Estimated slopes")+
                 ylab("Frequency")+
-                theme(axis.title=element_text(size=16),
-                    axis.text = element_text(size=14),
+                theme(axis.title=element_text(size=12),
+                    axis.text = element_text(size=12),
                     panel.background = element_rect(fill="white",
                                                   colour="black"))
         
@@ -70,42 +72,53 @@ intercept.perc <- sDFintercept <- NULL
                 geom_vline(xintercept = intercept.0,color="red",linetype=2,size=.7)+
                 xlab("Estimated Intercepts")+
                 ylab("Frequency")+
-                theme(axis.title=element_text(size=16),
-                    axis.text = element_text(size=14),
+                theme(axis.title=element_text(size=12),
+                    axis.text = element_text(size=12),
                     panel.background = element_rect(fill="white",
                                                   colour="black"))
         
         # Original plot with Standardized DFslope as colour gradient
         s2 <- ggplot2::ggplot(result.tab, aes_string(y = mappy, x = mappx),
-                              environment = parent.frame())+
+                              environment = environment())+
             geom_point(data = result.tab,
                        aes(size = abs(sDFslope)), alpha = .8)+
-            ggplot2::scale_size_continuous(name = "sDF", range = c(1, 6))+
+            ggplot2::scale_size_continuous(name = "|sDF|", range = c(1, 6))+
+            ggplot2::geom_text(aes(label =  ifelse(abs(sDFslope) > cutoff, 
+                                  as.character(species), ""),
+                        vjust = 0, hjust = 0,
+                        color = "red", size = .7), show.legend = F,
+                        fontface = "bold") + 
             theme(legend.key.width = unit(.2,"cm"),
                   panel.background=element_rect(fill="white", colour = "black"),
-                  legend.text = element_text(size = 14),
+                  legend.text = element_text(size = 12),
                   panel.grid.major = element_blank(),
                   panel.grid.minor = element_blank())+
+            scale_x_continuous(expand = c(.2, .2)) +
             ggtitle("Standardized Difference in slope")+
-            theme(axis.title = element_text(size = 16),
-                  axis.text = element_text(size = 14),
+            theme(axis.title = element_text(size = 12),
+                  axis.text = element_text(size = 12),
                   panel.background = element_rect(fill = "white",
                                                   colour = "black"))
-
+             
         # Original plot with Standardized DFintercept as size gradient
         i2<-ggplot2::ggplot(result.tab,aes_string(y = mappy, x = mappx),
-                            environment = parent.frame())+
+                            environment = environment())+
             geom_point(data = result.tab,
                        aes(size = abs(sDFintercept)), alpha = .8)+
             ggplot2::scale_size_continuous(name = "sDF", range = c(1, 6))+
+            ggplot2::geom_text(aes(label = ifelse(abs(sDFintercept) > cutoff, 
+                                                as.character(species), ""), 
+                                 vjust = 0, hjust = 0, color = "red",
+                                 size = .7), show.legend = F,  fontface = "bold") +
             theme(legend.key.width = unit(.2,"cm"),
                   panel.background=element_rect(fill="white",colour="black"),
-                  legend.text = element_text(size=14),
+                  legend.text = element_text(size=12),
                   panel.grid.major = element_blank(),
                   panel.grid.minor = element_blank())+
+          scale_x_continuous(expand = c(.2, .2)) +
             ggtitle("Standardized Difference in Intercept")+
-            theme(axis.title=element_text(size=16),
-                  axis.text = element_text(size=14),
+            theme(axis.title=element_text(size=12),
+                  axis.text = element_text(size=12),
                   panel.background = element_rect(fill="white",
                                                   colour="black"))
 
@@ -118,8 +131,8 @@ intercept.perc <- sDFintercept <- NULL
                                colour="black", fill="white",binwidth=.5)+
                 geom_vline(xintercept = -cutoff,color="red",linetype=2,size=.7)+
                 geom_vline(xintercept = cutoff,color="red",linetype=2,size=.7)+
-                theme(axis.title=element_text(size=16),
-                    axis.text = element_text(size=14),
+                theme(axis.title=element_text(size=12),
+                    axis.text = element_text(size=12),
                     panel.background = element_rect(fill="white",
                                                   colour="black"))
 
@@ -132,8 +145,8 @@ intercept.perc <- sDFintercept <- NULL
                                colour="black", fill="white",binwidth=.5)+
                 geom_vline(xintercept = -cutoff,color="red",linetype=2,size=.7)+
                 geom_vline(xintercept = cutoff,color="red",linetype=2,size=.7)+
-                theme(axis.title=element_text(size=16),
-                    axis.text = element_text(size=14),
+                theme(axis.title=element_text(size=12),
+                    axis.text = element_text(size=12),
                     panel.background = element_rect(fill="white",
                                               colour="black"))                
 
@@ -145,8 +158,8 @@ intercept.perc <- sDFintercept <- NULL
                                alpha = .3)+
                 xlab("% of change in Slope")+
                 ylab("Frequency") +
-                theme(axis.title=element_text(size=16),
-                       axis.text = element_text(size=14),
+                theme(axis.title=element_text(size=12),
+                       axis.text = element_text(size=12),
                        panel.background = element_rect(fill="white",
                                                        colour="black"))
 
@@ -157,8 +170,8 @@ intercept.perc <- sDFintercept <- NULL
                               alpha = .3)+
                 xlab("% of change in Intercept")+
                 ylab("Frequency")+
-                theme(axis.title=element_text(size=16),
-                    axis.text = element_text(size=14),
+                theme(axis.title=element_text(size=12),
+                    axis.text = element_text(size=12),
                     panel.background = element_rect(fill="white",
                                                   colour="black"))
 

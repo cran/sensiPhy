@@ -5,7 +5,7 @@
 \title{Influential clade detection - Phylogenetic Linear Regression}
 \usage{
 clade_phylm(formula, data, phy, model = "lambda", track = TRUE, clade.col,
-  n.species = 5, ...)
+  n.species = 5, times = 100, ...)
 }
 \arguments{
 \item{formula}{The model formula}
@@ -24,6 +24,8 @@ specification (a character vector with clade names).}
 
 \item{n.species}{Minimum number of species in the clade in order to include
 this clade in the leave-one-out deletion analyis. Default is \code{5}.}
+
+\item{times}{Number of simulations for the randomization test.}
 
 \item{...}{Further arguments to be passed to \code{phylolm}}
 }
@@ -63,6 +65,14 @@ results. The impact of of a specific clade on model estimates is calculated by t
 comparison between the full model (with all species) and the model without 
 the species belonging to a clade.
 
+Additionally, to account for the influence of the number of species on each 
+clade (clade sample size), this function also estimate a null distribution of slopes
+expected for the number of species in a given clade. This is done by fitting
+ models without the same number of species in the given clade. 
+ The number of simulations to be performed is set by 'times'. To test if the 
+ clade influence differs from the null expectation, a randomization test can
+ be performed using 'summary(x)'. 
+
 All phylogenetic models from \code{phylolm} can be used, i.e. \code{BM},
 \code{OUfixedRoot}, \code{OUrandomRoot}, \code{lambda}, \code{kappa},
 \code{delta}, \code{EB} and \code{trend}. See ?\code{phylolm} for details.
@@ -77,11 +87,12 @@ Currently, this function can only implement simple linear models (i.e.
 Output can be visualised using \code{sensi_plot}.
 }
 \examples{
+\dontrun{
 # Load data:
 data(primates)
 # run analysis:
 clade <- clade_phylm(log(sexMaturity) ~ log(adultMass), 
-phy = primates$phy[[1]], data = primates$data, clade.col = "family")
+phy = primates$phy[[1]], data = primates$data, times = 30, clade.col = "family")
 # To check summary results and most influential clades:
 summary(clade)
 # Visual diagnostics for clade removal:
@@ -89,6 +100,7 @@ sensi_plot(clade)
 # Specify which clade removal to plot:
 sensi_plot(clade, "Cercopithecidae")
 sensi_plot(clade, "Cebidae")
+}
 }
 \author{
 Gustavo Paterno
