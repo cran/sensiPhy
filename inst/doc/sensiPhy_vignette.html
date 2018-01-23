@@ -12,7 +12,7 @@
 
 <meta name="author" content="Gustavo Paterno, Caterina Penone, Gijsbert Werner" />
 
-<meta name="date" content="2017-12-15" />
+<meta name="date" content="2018-01-23" />
 
 <title>sensiPhy: R-package for sensitivity analysis in phylogenetic comparative methods.</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">sensiPhy: R-package for sensitivity analysis in phylogenetic comparative methods.</h1>
 <h4 class="author"><em>Gustavo Paterno, Caterina Penone, Gijsbert Werner</em></h4>
-<h4 class="date"><em>2017-12-15</em></h4>
+<h4 class="date"><em>2018-01-23</em></h4>
 
 
 
@@ -590,12 +590,252 @@ fit.km &lt;-<span class="st"> </span><span class="kw">tree_bd</span>(<span class
 <span class="kw">sensi_plot</span>(fit.km)</code></pre></div>
 </div>
 </div>
+<div id="using-sensiphy-with-other-packages-caper-phytools-gls" class="section level3">
+<h3>6. Using sensiPhy with other packages (caper, phytools, gls)</h3>
+<p>sensiPhy leverages comparative methods implemented in specific R packages:<br />
+1. <code>phylolm</code> for pgls regressions<br />
+2. <code>phytools</code> for phylogenetic signal estimates<br />
+3. <code>geiger</code> for macroevolutionary models (continuous and discrete trait evolution)</p>
+<p>Nevertheless, users can still use sensiPhy to perform sensitivity analysis when they had performed their initial comparative analyses in another package.</p>
+<p>For instance, if you have used <code>caper</code>, <code>phytools</code> or <code>gls</code> to fit your full models, you can still use <code>sensiPhy</code> to test the sensitivity of those models to multiple types of uncertainty. In order to do this, users will need to set arguments that mirror the specific parameters from their full analysis. For example, to compare results one needs to use the same evolutionary model in pgls (e.g “lambda”, “BM”, etc), or the same metric for phylogenetic signal tests (K or lambda). See below for some examples:</p>
+<div id="pgls-regression" class="section level4">
+<h4>6.1 PGLS regression</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### prepare dataset for caper pgls:
+<span class="kw">library</span>(caper)
+<span class="kw">library</span>(phytools)
+<span class="kw">library</span>(phylolm)
+<span class="kw">library</span>(sensiPhy)
+<span class="co"># selected variables from dataset:</span>
+alien.data &lt;-<span class="st"> </span>alien.data[<span class="kw">c</span>(<span class="st">&quot;gestaLen&quot;</span>, <span class="st">&quot;adultMass&quot;</span>)]
+
+<span class="co"># create variable with species names:</span>
+alien.data<span class="op">$</span>sp &lt;-<span class="st"> </span><span class="kw">rownames</span>(alien.data)
+
+<span class="co"># caper</span>
+<span class="co"># prepare comparative dataset:</span>
+comp.dat &lt;-<span class="st"> </span><span class="kw">comparative.data</span>(<span class="dt">data =</span> alien.data, <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], 
+                             <span class="dt">names.col =</span> <span class="st">&quot;sp&quot;</span>)
+<span class="co"># check comparative dataset:</span>
+<span class="kw">print</span>(comp.dat)
+
+### Run PGLS analysis (full model)
+<span class="co"># using caper (lambda)</span>
+fit.caper.lam &lt;-<span class="st"> </span><span class="kw">pgls</span>(<span class="kw">log</span>(gestaLen)<span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), comp.dat, <span class="dt">lambda=</span><span class="st">&quot;ML&quot;</span>)
+<span class="kw">coef</span>(fit.caper.lam)
+
+<span class="co"># using caper (delta)</span>
+fit.caper.del &lt;-<span class="st"> </span><span class="kw">pgls</span>(<span class="kw">log</span>(gestaLen)<span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), comp.dat, <span class="dt">delta=</span><span class="st">&quot;ML&quot;</span>)
+<span class="kw">coef</span>(fit.caper.del)
+
+<span class="co"># using phylolm (lambda)</span>
+fit.phylo.lam &lt;-<span class="st"> </span><span class="kw">phylolm</span>(<span class="kw">log</span>(gestaLen)<span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), comp.dat<span class="op">$</span>data, comp.dat<span class="op">$</span>phy,
+                 <span class="dt">model =</span> <span class="st">&quot;lambda&quot;</span>)
+<span class="kw">coef</span>(fit.phylo.lam)
+
+<span class="co"># using phylolm (del)</span>
+fit.phylo.del &lt;-<span class="st"> </span><span class="kw">phylolm</span>(<span class="kw">log</span>(gestaLen)<span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), comp.dat<span class="op">$</span>data, comp.dat<span class="op">$</span>phy,
+                         <span class="dt">model =</span> <span class="st">&quot;delta&quot;</span>)
+<span class="kw">coef</span>(fit.phylo.del)
+
+### run sensitivity analysis with sensiPhy (influential species):
+<span class="kw">library</span>(sensiPhy)
+<span class="co"># run analysis (lambda):</span>
+lam &lt;-<span class="st"> </span><span class="kw">influ_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> comp.dat<span class="op">$</span>phy, 
+                     <span class="dt">data =</span> comp.dat<span class="op">$</span>data, <span class="dt">model =</span> <span class="st">&quot;lambda&quot;</span>)
+<span class="co"># check full model estimates and compare to initial estimates:</span>
+lam<span class="op">$</span>full.model.estimates
+<span class="co"># test for influential species:</span>
+<span class="kw">summary</span>(lam)
+
+<span class="co"># run analysis (delta):</span>
+del &lt;-<span class="st"> </span><span class="kw">influ_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> comp.dat<span class="op">$</span>phy, 
+                     <span class="dt">data =</span> comp.dat<span class="op">$</span>data, <span class="dt">model =</span> <span class="st">&quot;delta&quot;</span>)
+<span class="co"># check full model estimates and compare to initial estimates:</span>
+del<span class="op">$</span>full.model.estimates
+<span class="co"># test for influential species:</span>
+<span class="kw">summary</span>(del)</code></pre></div>
+</div>
+<div id="phylogenetic-signal" class="section level4">
+<h4>6.2 phylogenetic signal</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 2. phylogenetic signal:-------------------------------------------------------</span>
+<span class="kw">library</span>(picante)
+<span class="kw">library</span>(phytools)
+<span class="kw">library</span>(sensiPhy)
+
+### Estimate phylogenetic signal:
+<span class="co"># using picante (K)</span>
+<span class="kw">phylosignal</span>(<span class="kw">log</span>(comp.dat<span class="op">$</span>data<span class="op">$</span>adultMass), comp.dat<span class="op">$</span>phy, <span class="dt">reps =</span> <span class="dv">1000</span>)
+
+<span class="co"># using phytools (K):</span>
+phytools<span class="op">::</span><span class="kw">phylosig</span>(<span class="dt">x =</span> <span class="kw">log</span>(comp.dat<span class="op">$</span>data<span class="op">$</span>adultMass), <span class="dt">tree =</span> comp.dat<span class="op">$</span>phy, 
+                   <span class="dt">nsim =</span> <span class="dv">1000</span>,
+                   <span class="dt">method =</span> <span class="st">&quot;K&quot;</span>, <span class="dt">test =</span> T)
+
+<span class="co"># using phytools (lambda):</span>
+phytools<span class="op">::</span><span class="kw">phylosig</span>(<span class="dt">x =</span> <span class="kw">log</span>(comp.dat<span class="op">$</span>data<span class="op">$</span>adultMass), <span class="dt">tree =</span> comp.dat<span class="op">$</span>phy, 
+                   <span class="dt">nsim =</span> <span class="dv">1000</span>,
+                   <span class="dt">method =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">test =</span> T)
+
+### run sensitivity analysis with sensiPhy (influential species):
+<span class="kw">library</span>(sensiPhy)
+<span class="co"># Load data:</span>
+<span class="kw">data</span>(alien)
+<span class="co"># Logtransform data</span>
+comp.dat<span class="op">$</span>data<span class="op">$</span>logMass &lt;-<span class="st"> </span><span class="kw">log</span>(comp.dat<span class="op">$</span>data<span class="op">$</span>adultMass) 
+
+<span class="co"># Run sensitivity analysis (K):</span>
+influ.k &lt;-<span class="st"> </span><span class="kw">influ_physig</span>(<span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> comp.dat<span class="op">$</span>data, <span class="dt">phy =</span> comp.dat<span class="op">$</span>phy, 
+                      <span class="dt">method =</span> <span class="st">&quot;K&quot;</span>)
+<span class="co"># check full model estimates and compare to initial estimates:</span>
+influ.k<span class="op">$</span>full.data.estimates
+<span class="co"># check for influential species:</span>
+<span class="kw">summary</span>(influ.k)
+
+<span class="co"># Run sensitivity analysis (lambda):</span>
+influ.lam &lt;-<span class="st"> </span><span class="kw">influ_physig</span>(<span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> comp.dat<span class="op">$</span>data, <span class="dt">phy =</span> comp.dat<span class="op">$</span>phy, 
+                      <span class="dt">method =</span> <span class="st">&quot;lambda&quot;</span>)
+<span class="co"># check full model estimates and compare to initial estimates:</span>
+influ.lam<span class="op">$</span>full.data.estimates
+<span class="co"># check for influential species:</span>
+<span class="kw">summary</span>(influ.lam)</code></pre></div>
+</div>
+</div>
+<div id="how-long-does-it-take" class="section level3">
+<h3>7. How long does it take?</h3>
+<p>Although most functions implemented in sensiPhy are reasonably fast (runtime less them 1 min), it is important to be aware that some functions might take a long time to run. This is more likely when analyzing models with a high number of species (&gt;1000) or number of repetitions, and also when interacting two types of uncertainties (e.g. functions: <code>tree_clade</code> and <code>tree_samp</code>). To keep track of the time while running functions, we recommend users to set the argument <code>“track = TRUE”</code> which prints a progress bar and gives a good idea of how long the analysis will take before it finishes. As an indication, some examples of elapsed time on a standard desktop computer [Linux, Intel i7, 2.7GHz, 12GB ram] are presented below:</p>
+<p><strong>Analyses with single uncertainty</strong>: <code>tree_phylm</code></p>
+<table>
+<thead>
+<tr class="header">
+<th>function</th>
+<th>N species</th>
+<th>N trees</th>
+<th>time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>tree_phylm</td>
+<td>100</td>
+<td>30</td>
+<td>~ 2 sec</td>
+</tr>
+<tr class="even">
+<td>tree_phylm</td>
+<td>100</td>
+<td>100</td>
+<td>~ 5 sec</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Analyses with single uncertainty</strong>: <code>clade_phylm</code></p>
+<table>
+<thead>
+<tr class="header">
+<th>function</th>
+<th>N species</th>
+<th>N sim</th>
+<th>time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>clade_phylm</td>
+<td>100</td>
+<td>100</td>
+<td>~ 7 sec</td>
+</tr>
+<tr class="even">
+<td>clade_phylm</td>
+<td>100</td>
+<td>300</td>
+<td>~ 31 sec</td>
+</tr>
+<tr class="odd">
+<td>clade_phylm</td>
+<td>100</td>
+<td>500</td>
+<td>~ 61 sec</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Analyses with single uncertainty</strong>: <code>samp_phylm</code></p>
+<table>
+<thead>
+<tr class="header">
+<th>function</th>
+<th>N species</th>
+<th>N sim</th>
+<th>time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>samp_phylm</td>
+<td>100</td>
+<td>100</td>
+<td>~ 11 sec</td>
+</tr>
+<tr class="even">
+<td>samp_phylm</td>
+<td>100</td>
+<td>300</td>
+<td>~ 25 sec</td>
+</tr>
+<tr class="odd">
+<td>samp_phylm</td>
+<td>100</td>
+<td>500</td>
+<td>~ 43 sec</td>
+</tr>
+<tr class="even">
+<td>samp_phylm</td>
+<td>500</td>
+<td>100</td>
+<td>~ 22 sec</td>
+</tr>
+<tr class="odd">
+<td>samp_phylm</td>
+<td>1000</td>
+<td>100</td>
+<td>~ 35 sec</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Analyses with single uncertainty</strong>: <code>influ_phylm</code></p>
+<table>
+<thead>
+<tr class="header">
+<th>function</th>
+<th>N species</th>
+<th>time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>influ_phylm</td>
+<td>100</td>
+<td>~ 4 sec</td>
+</tr>
+<tr class="even">
+<td>influ_phylm</td>
+<td>500</td>
+<td>~ 43 sec</td>
+</tr>
+<tr class="odd">
+<td>influ_phylm</td>
+<td>1000</td>
+<td>~ 148 sec</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="how-to-support-sensiphy" class="section level2">
-<h2>6. How to support sensiPhy</h2>
+<h2>8. How to support sensiPhy</h2>
 <p>Thanks for you interest in contributing with <code>sensiPhy</code>. First you need to register at <a href="https://github.com/">Github</a>. You can help developing <code>sensiPhy</code> in different ways:</p>
 <div id="report-bugs-or-errors" class="section level3">
-<h3>6.1 Report bugs or errors</h3>
+<h3>8.1 Report bugs or errors</h3>
 <p>If you have any problem running <code>sensiPhy</code> functions, please report the problem as a new <a href="https://github.com/paternogbc/sensiPhy/issues/new">issue</a>. To do this, folow the steps below:</p>
 <ul>
 <li>Create a new <a href="https://github.com/paternogbc/sensiPhy/issues/new">issue</a></li>
@@ -605,7 +845,7 @@ fit.km &lt;-<span class="st"> </span><span class="kw">tree_bd</span>(<span class
 </ul>
 </div>
 <div id="small-changes-in-sensiphy-documentation" class="section level3">
-<h3>6.2 Small changes in <code>sensiPhy</code> documentation</h3>
+<h3>8.2 Small changes in <code>sensiPhy</code> documentation</h3>
 <p>If you find a typo on <code>sensiPhy</code> documentation or if you want to make a small change on any file, you can do it online. Search for the file you want to change at the <a href="https://github.com/paternogbc/sensiPhy">master branch</a>, then:</p>
 <ul>
 <li>Edit the file online</li>
@@ -615,7 +855,7 @@ fit.km &lt;-<span class="st"> </span><span class="kw">tree_bd</span>(<span class
 </ul>
 </div>
 <div id="contribute-with-code" class="section level3">
-<h3>6.3 Contribute with code</h3>
+<h3>8.3 Contribute with code</h3>
 <p>If you want to make a bigger contribution and help us with <code>sensiPhy</code> code:</p>
 <ol style="list-style-type: decimal">
 <li>Fork it (<a href="https://github.com/paternogbc/sensiPhy/fork" class="uri">https://github.com/paternogbc/sensiPhy/fork</a>)</li>
@@ -626,11 +866,11 @@ fit.km &lt;-<span class="st"> </span><span class="kw">tree_bd</span>(<span class
 </ol>
 </div>
 <div id="new-ideas-or-suggestions" class="section level3">
-<h3>6.4 New ideas or suggestions?</h3>
+<h3>8.4 New ideas or suggestions?</h3>
 <p>If you need to ask something via email, send to <a href="mailto:paternogbc@gmail.com">paternogbc@gmail.com</a></p>
 </div>
 <div id="code-of-conduct" class="section level3">
-<h3>6.5 Code of Conduct</h3>
+<h3>8.5 Code of Conduct</h3>
 <p>Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its <a href="https://github.com/paternogbc/sensiPhy/blob/master/CODE_OF_CONDUCT.md">terms</a>.</p>
 </div>
 </div>

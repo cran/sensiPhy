@@ -436,3 +436,103 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Plot data
 #  sensi_plot(fit.km)
 
+## ----warning=FALSE, message=FALSE, fig.width=8, fig.height=4-------------
+#  ### prepare dataset for caper pgls:
+#  library(caper)
+#  library(phytools)
+#  library(phylolm)
+#  library(sensiPhy)
+#  # selected variables from dataset:
+#  alien.data <- alien.data[c("gestaLen", "adultMass")]
+#  
+#  # create variable with species names:
+#  alien.data$sp <- rownames(alien.data)
+#  
+#  # caper
+#  # prepare comparative dataset:
+#  comp.dat <- comparative.data(data = alien.data, phy = alien.phy[[1]],
+#                               names.col = "sp")
+#  # check comparative dataset:
+#  print(comp.dat)
+#  
+#  ### Run PGLS analysis (full model)
+#  # using caper (lambda)
+#  fit.caper.lam <- pgls(log(gestaLen)~ log(adultMass), comp.dat, lambda="ML")
+#  coef(fit.caper.lam)
+#  
+#  # using caper (delta)
+#  fit.caper.del <- pgls(log(gestaLen)~ log(adultMass), comp.dat, delta="ML")
+#  coef(fit.caper.del)
+#  
+#  # using phylolm (lambda)
+#  fit.phylo.lam <- phylolm(log(gestaLen)~ log(adultMass), comp.dat$data, comp.dat$phy,
+#                   model = "lambda")
+#  coef(fit.phylo.lam)
+#  
+#  # using phylolm (del)
+#  fit.phylo.del <- phylolm(log(gestaLen)~ log(adultMass), comp.dat$data, comp.dat$phy,
+#                           model = "delta")
+#  coef(fit.phylo.del)
+#  
+#  ### run sensitivity analysis with sensiPhy (influential species):
+#  library(sensiPhy)
+#  # run analysis (lambda):
+#  lam <- influ_phylm(log(gestaLen) ~ log(adultMass), phy = comp.dat$phy,
+#                       data = comp.dat$data, model = "lambda")
+#  # check full model estimates and compare to initial estimates:
+#  lam$full.model.estimates
+#  # test for influential species:
+#  summary(lam)
+#  
+#  # run analysis (delta):
+#  del <- influ_phylm(log(gestaLen) ~ log(adultMass), phy = comp.dat$phy,
+#                       data = comp.dat$data, model = "delta")
+#  # check full model estimates and compare to initial estimates:
+#  del$full.model.estimates
+#  # test for influential species:
+#  summary(del)
+
+## ----warning=FALSE, message=FALSE, fig.width=8, fig.height=4-------------
+#  
+#  # 2. phylogenetic signal:-------------------------------------------------------
+#  library(picante)
+#  library(phytools)
+#  library(sensiPhy)
+#  
+#  ### Estimate phylogenetic signal:
+#  # using picante (K)
+#  phylosignal(log(comp.dat$data$adultMass), comp.dat$phy, reps = 1000)
+#  
+#  # using phytools (K):
+#  phytools::phylosig(x = log(comp.dat$data$adultMass), tree = comp.dat$phy,
+#                     nsim = 1000,
+#                     method = "K", test = T)
+#  
+#  # using phytools (lambda):
+#  phytools::phylosig(x = log(comp.dat$data$adultMass), tree = comp.dat$phy,
+#                     nsim = 1000,
+#                     method = "lambda", test = T)
+#  
+#  ### run sensitivity analysis with sensiPhy (influential species):
+#  library(sensiPhy)
+#  # Load data:
+#  data(alien)
+#  # Logtransform data
+#  comp.dat$data$logMass <- log(comp.dat$data$adultMass)
+#  
+#  # Run sensitivity analysis (K):
+#  influ.k <- influ_physig("logMass", data = comp.dat$data, phy = comp.dat$phy,
+#                        method = "K")
+#  # check full model estimates and compare to initial estimates:
+#  influ.k$full.data.estimates
+#  # check for influential species:
+#  summary(influ.k)
+#  
+#  # Run sensitivity analysis (lambda):
+#  influ.lam <- influ_physig("logMass", data = comp.dat$data, phy = comp.dat$phy,
+#                        method = "lambda")
+#  # check full model estimates and compare to initial estimates:
+#  influ.lam$full.data.estimates
+#  # check for influential species:
+#  summary(influ.lam)
+
