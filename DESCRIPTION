@@ -1,7 +1,7 @@
 Package: sensiPhy
 Title: Sensitivity Analysis for Comparative Methods
-Version: 0.8.1
-Date: 2018-01-23
+Version: 0.8.2
+Date: 2018-06-12
 Authors@R: c(
     person("Gustavo","Paterno", email = "paternogbc@gmail.com", role = c("cre","aut")),
     person("Gijsbert", "Werner", email = "gijsbert.werner@zoo.ox.ac.uk", role = "aut"),
@@ -14,7 +14,7 @@ Description: An implementation of sensitivity analysis for phylogenetic comparat
  (i) Species Sampling uncertainty (sample size; influential species and clades).
  (ii) Phylogenetic uncertainty (different topologies and/or branch lengths).
  (iii) Data uncertainty (intraspecific variation and measurement error).
-Depends: R (>= 3.1.0), ape (>= 3.3), phylolm (>= 2.4), ggplot2 (>=
+Depends: R (>= 3.4.0), ape (>= 3.3), phylolm (>= 2.4), ggplot2 (>=
         2.1.0)
 Imports: caper (>= 0.5.2), phytools (>= 0.6), geiger (>= 2.0)
 License: GPL-2
@@ -25,10 +25,10 @@ RoxygenNote: 6.0.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2018-01-23 02:39:09 UTC; paterno
+Packaged: 2018-06-12 16:19:53 UTC; paterno
 Author: Gustavo Paterno [cre, aut],
   Gijsbert Werner [aut],
   Caterina Penone [aut],
   Pablo Martinez [ctb]
 Repository: CRAN
-Date/Publication: 2018-01-23 04:22:00 UTC
+Date/Publication: 2018-06-12 20:28:59 UTC
