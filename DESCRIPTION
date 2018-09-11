@@ -1,7 +1,7 @@
 Package: sensiPhy
 Title: Sensitivity Analysis for Comparative Methods
-Version: 0.8.2
-Date: 2018-06-12
+Version: 0.8.3
+Date: 2018-09-08
 Authors@R: c(
     person("Gustavo","Paterno", email = "paternogbc@gmail.com", role = c("cre","aut")),
     person("Gijsbert", "Werner", email = "gijsbert.werner@zoo.ox.ac.uk", role = "aut"),
@@ -25,10 +25,10 @@ RoxygenNote: 6.0.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2018-06-12 16:19:53 UTC; paterno
+Packaged: 2018-09-11 12:30:02 UTC; paterno
 Author: Gustavo Paterno [cre, aut],
   Gijsbert Werner [aut],
   Caterina Penone [aut],
   Pablo Martinez [ctb]
 Repository: CRAN
-Date/Publication: 2018-06-12 20:28:59 UTC
+Date/Publication: 2018-09-11 12:50:02 UTC
