@@ -4,8 +4,16 @@
 \alias{tree_influ_phylm}
 \title{Interaction between phylogenetic uncertainty and influential species detection - Phylogenetic Linear Regression}
 \usage{
-tree_influ_phylm(formula, data, phy, n.tree = 2, cutoff = 2,
-  model = "lambda", track = TRUE, ...)
+tree_influ_phylm(
+  formula,
+  data,
+  phy,
+  n.tree = 2,
+  cutoff = 2,
+  model = "lambda",
+  track = TRUE,
+  ...
+)
 }
 \arguments{
 \item{formula}{The model formula}
@@ -40,7 +48,7 @@ value of the phylogenetic parameter (e.g. \code{lambda}) for the full model
 without deleted species.
 
 \code{influential_species}: List of influential species, both
-based on standardised difference in interecept and in the slope of the
+based on standardised difference in intercept and in the slope of the
 regression. Species are ordered from most influential to less influential and
 only include species with a standardised difference > \code{cutoff}.
 
@@ -106,6 +114,12 @@ summary(tree_influ)
 }
 }
 \references{
+Paterno, G. B., Penone, C. Werner, G. D. A. 
+\href{http://doi.wiley.com/10.1111/2041-210X.12990}{sensiPhy: 
+An r-package for sensitivity analysis in phylogenetic 
+comparative methods.} Methods in Ecology and Evolution 
+2018, 9(6):1461-1467
+
 Ho, L. S. T. and Ane, C. 2014. "A linear-time algorithm for 
 Gaussian and non-Gaussian trait evolution models". Systematic Biology 63(3):397-408.
 }

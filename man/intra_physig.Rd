@@ -4,8 +4,16 @@
 \alias{intra_physig}
 \title{Intraspecific variability - Phylogenetic signal}
 \usage{
-intra_physig(trait.col, data, phy, V = NULL, n.intra = 100,
-  distrib = "normal", method = "K", track = TRUE)
+intra_physig(
+  trait.col,
+  data,
+  phy,
+  V = NULL,
+  n.intra = 100,
+  distrib = "normal",
+  method = "K",
+  track = TRUE
+)
 }
 \arguments{
 \item{trait.col}{The name of a column in the provided data frame with trait 
@@ -89,6 +97,12 @@ summary(intra)
 }
 }
 \references{
+Paterno, G. B., Penone, C. Werner, G. D. A. 
+\href{http://doi.wiley.com/10.1111/2041-210X.12990}{sensiPhy: 
+An r-package for sensitivity analysis in phylogenetic 
+comparative methods.} Methods in Ecology and Evolution 
+2018, 9(6):1461-1467
+
 Martinez, P. a., Zurano, J.P., Amado, T.F., Penone, C., Betancur-R, R., 
 Bidau, C.J. & Jacobina, U.P. (2015). Chromosomal diversity in tropical reef 
 fishes is related to body size and depth range. Molecular Phylogenetics and 

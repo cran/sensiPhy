@@ -65,6 +65,12 @@
 #' \code{\link{tree_phylm}},\code{\link{tree_samp_phyglm}},\code{\link{sensi_plot}}
 #' @references 
 #' 
+#' Paterno, G. B., Penone, C. Werner, G. D. A. 
+#' \href{http://doi.wiley.com/10.1111/2041-210X.12990}{sensiPhy: 
+#' An r-package for sensitivity analysis in phylogenetic 
+#' comparative methods.} Methods in Ecology and Evolution 
+#' 2018, 9(6):1461-1467
+#' 
 #' Werner, G.D.A., Cornwell, W.K., Sprent, J.I., Kattge, J. & Kiers, E.T. (2014).
 #' A single evolutionary innovation drives the deep evolution of symbiotic N2-fixation
 #' in angiosperms. Nature Communications, 5, 4087.
@@ -93,13 +99,10 @@
 #' data(alien)
 #' # Run analysis:
 #' samp <- tree_samp_phylm(log(gestaLen) ~ log(adultMass), phy = alien$phy,
-#'                                     data = alien$data, n.tree = 2, n.sim=2)
+#'                                     data = alien$data, n.tree = 1, n.sim=1)
 #' summary(samp)
-#' head(samp$sensi.estimates)
 #' # Visual diagnostics
 #' sensi_plot(samp)
-#' sensi_plot(samp, graphs = 1)
-#' sensi_plot(samp, graphs = 2)
 #' }
 #' @export
 
@@ -109,11 +112,16 @@ tree_samp_phylm <- function(formula, data, phy, n.sim = 30, n.tree = 2,
   
 
   # Error checking:
-  if(!is.data.frame(data)) stop("data must be class 'data.frame'")
-  if(class(formula)!="formula") stop("formula must be class 'formula'")
-  if(class(phy)!="multiPhylo") stop("phy must be class 'multiPhylo'")
-  if(length(phy)<n.tree) stop("'times' must be smaller (or equal) than the number of trees in the 'multiPhylo' object")
-  if(length(breaks) < 2)  stop("Please include more than one break, e.g. breaks=c(.3,.5)")
+  if (!inherits(data, "data.frame"))
+    stop("data must be class 'data.frame'")
+  if (!inherits(formula, "formula"))
+    stop("formula must be class 'formula'")
+  if (!inherits(phy, "multiPhylo"))
+    stop("phy must be class 'multiPhylo'")
+  if (length(phy) < n.tree)
+    stop("'times' must be smaller (or equal) than the number of trees in the 'multiPhylo' object")
+  if (length(breaks) < 2)
+    stop("Please include more than one break, e.g. breaks=c(.3,.5)")
   if((model == "trend") && (sum(ape::is.ultrametric(phy))>1)) 
     stop("Trend is unidentifiable for ultrametric trees., see ?phylolm for details")
   else

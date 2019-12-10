@@ -4,9 +4,21 @@
 \alias{intra_clade_phyglm}
 \title{Interaction between intraspecific variability and influential clade detection - Phylogenetic Logistic Regression}
 \usage{
-intra_clade_phyglm(formula, data, phy, clade.col, n.species = 5,
-  n.sim = 100, n.intra = 2, Vx = NULL, distrib = "normal",
-  x.transf = NULL, btol = 50, track = TRUE, ...)
+intra_clade_phyglm(
+  formula,
+  data,
+  phy,
+  clade.col,
+  n.species = 5,
+  n.sim = 100,
+  n.intra = 2,
+  Vx = NULL,
+  distrib = "normal",
+  x.transf = NULL,
+  btol = 50,
+  track = TRUE,
+  ...
+)
 }
 \arguments{
 \item{formula}{The model formula}
@@ -139,6 +151,12 @@ sensi_plot(intra_clade)
 }
 }
 \references{
+Paterno, G. B., Penone, C. Werner, G. D. A. 
+\href{http://doi.wiley.com/10.1111/2041-210X.12990}{sensiPhy: 
+An r-package for sensitivity analysis in phylogenetic 
+comparative methods.} Methods in Ecology and Evolution 
+2018, 9(6):1461-1467
+
 Ho, L. S. T. and Ane, C. 2014. "A linear-time algorithm for 
 Gaussian and non-Gaussian trait evolution models". Systematic Biology 63(3):397-408.
 }

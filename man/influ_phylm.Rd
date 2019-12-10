@@ -4,8 +4,15 @@
 \alias{influ_phylm}
 \title{Influential species detection - Phylogenetic Linear Regression}
 \usage{
-influ_phylm(formula, data, phy, model = "lambda", cutoff = 2,
-  track = TRUE, ...)
+influ_phylm(
+  formula,
+  data,
+  phy,
+  model = "lambda",
+  cutoff = 2,
+  track = TRUE,
+  ...
+)
 }
 \arguments{
 \item{formula}{The model formula}
@@ -97,6 +104,12 @@ sensi_plot(influ)
 sensi_plot(influ, param = "estimate", graphs = 2)
 }
 \references{
+Paterno, G. B., Penone, C. Werner, G. D. A. 
+\href{http://doi.wiley.com/10.1111/2041-210X.12990}{sensiPhy: 
+An r-package for sensitivity analysis in phylogenetic 
+comparative methods.} Methods in Ecology and Evolution 
+2018, 9(6):1461-1467
+
 Ho, L. S. T. and Ane, C. 2014. "A linear-time algorithm for 
 Gaussian and non-Gaussian trait evolution models". Systematic Biology 63(3):397-408.
 }

@@ -2,10 +2,18 @@
 % Please edit documentation in R/influ_continuous.R
 \name{influ_continuous}
 \alias{influ_continuous}
-\title{Influential Species Detection - Trait Evolution Continous Characters}
+\title{Influential Species Detection - Trait Evolution Continuous Characters}
 \usage{
-influ_continuous(data, phy, model, bounds = list(), cutoff = 2,
-  n.cores = NULL, track = TRUE, ...)
+influ_continuous(
+  data,
+  phy,
+  model,
+  bounds = list(),
+  cutoff = 2,
+  n.cores = NULL,
+  track = TRUE,
+  ...
+)
 }
 \arguments{
 \item{data}{Data vector for a single continuous trait, with names matching tips in \code{phy}.}
@@ -95,6 +103,12 @@ summary(influ_cont3)
 }
 }
 \references{
+Paterno, G. B., Penone, C. Werner, G. D. A. 
+\href{http://doi.wiley.com/10.1111/2041-210X.12990}{sensiPhy: 
+An r-package for sensitivity analysis in phylogenetic 
+comparative methods.} Methods in Ecology and Evolution 
+2018, 9(6):1461-1467.  
+
 Yang Z. 2006. Computational Molecular Evolution. Oxford University Press: Oxford. 
 
 Harmon Luke J, Jason T Weir, Chad D Brock, Richard E Glor, and Wendell Challenger. 2008.

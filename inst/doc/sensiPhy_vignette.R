@@ -1,16 +1,16 @@
-## ----setup, include=FALSE------------------------------------------------
+## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(eval = F)
 
-## ---- out.width = "700px", echo=FALSE, eval=T----------------------------
+## ---- out.width = "700px", echo=FALSE, eval=T---------------------------------
 knitr::include_graphics("sensiPhy_workflow_functions.png")
 
-## ----echo=TRUE, warning=FALSE, message=FALSE-----------------------------
+## ----echo=TRUE, warning=FALSE, message=FALSE----------------------------------
 #  library(sensiPhy)
 #  # run analysis:
 #  influ <- influ_phylm(log(gestaLen) ~ log(adultMass), phy = alien$phy[[1]],
 #                       data = alien$data, track=FALSE)
 
-## ----echo=TRUE, warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----
+## ----echo=TRUE, warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----
 #  # To check summary results:
 #  summary(influ)
 #  
@@ -20,11 +20,11 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Visual diagnostics
 #  sensi_plot(influ)
 
-## ----echo=TRUE, warning=FALSE, message=FALSE, fig.width=6, fig.height=5.5----
+## ----echo=TRUE, warning=FALSE, message=FALSE, fig.width=6, fig.height=5.5-----
 #  # Check most influential species on the original regression plot:
 #  sensi_plot(influ, graphs = 2)
 
-## ----echo=TRUE, warning=FALSE, message=FALSE, fig.width=6.5, fig.height=4----
+## ----echo=TRUE, warning=FALSE, message=FALSE, fig.width=6.5, fig.height=4-----
 #  # Logtransform data
 #  alien.data$logMass <- log(alien.data$adultMass)
 #  # Run sensitivity analysis:
@@ -40,7 +40,7 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  sensi_plot(influ)
 #  sensi_plot(influ2)
 
-## ----echo=TRUE, warning=FALSE, message=FALSE, fig.width=4.5, fig.height=4----
+## ----echo=TRUE, warning=FALSE, message=FALSE, fig.width=4.5, fig.height=4-----
 #  # You can specify which graph to print:
 #  sensi_plot(influ, graphs = 1)
 #  sensi_plot(influ2, graphs = 1)
@@ -81,7 +81,7 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # exactly the same
 #  sensi_plot(influ_binary)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=5-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=5----------------
 #  data(primates)
 #  # run analysis:
 #  clade <- clade_phylm(log(sexMaturity) ~ log(adultMass), phy = primates$phy[[1]],
@@ -89,11 +89,11 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # To check summary results and most influential clades:
 #  summary(clade)
 
-## ----echo=TRUE, warning=FALSE, message=FALSE, fig.width=8, fig.height=5.5----
+## ----echo=TRUE, warning=FALSE, message=FALSE, fig.width=8, fig.height=5.5-----
 #  # Visual diagnostics for clade removal:
 #  sensi_plot(clade, "Cercopithecidae")
 
-## ----echo=TRUE, warning=FALSE, message=FALSE, fig.width=6, fig.height=5----
+## ----echo=TRUE, warning=FALSE, message=FALSE, fig.width=6, fig.height=5-------
 #  # Logtransform data
 #  alien.data$logMass <- log(alien.data$adultMass)
 #  # Run sensitivity analysis:
@@ -134,7 +134,7 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Visual diagnostics
 #  sensi_plot(clade_disc)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  # run analysis:
 #  samp <- samp_phylm(log(gestaLen) ~ log(adultMass), phy = alien$phy[[1]],
 #                     data = alien$data, n.sim = 50, track=FALSE)
@@ -148,7 +148,7 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Check results:
 #  summary(samp)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  # Visual diagnostics
 #  sensi_plot(samp)
 #  sensi_plot(samp2)
@@ -161,10 +161,10 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  sensi_plot(samp)
 #  sensi_plot(samp2, graphs = 1)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=7-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=7----------------
 #  sensi_plot(samp)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=7-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=7----------------
 #  # Logtransform data
 #  alien.data$logMass <- log(alien.data$adultMass)
 #  
@@ -178,12 +178,12 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Visual diagnostics
 #  sensi_plot(samp)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  # More visual diagnostics
 #  sensi_plot(samp2)
 #  sensi_plot(samp, graphs = 1)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=4-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=4----------------
 #  # Load data:
 #  data("primates")
 #  
@@ -198,7 +198,7 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Visual diagnostics
 #  sensi_plot(samp_cont)
 
-## ----warning=FALSE, message=FALSE, fig.width=8, fig.height=7-------------
+## ----warning=FALSE, message=FALSE, fig.width=8, fig.height=7------------------
 #  # Load data:
 #  data("primates")
 #  # Create a binary trait factor
@@ -215,7 +215,7 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Visual diagnostics
 #  sensi_plot(samp_binary)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  # Load data
 #  data(alien)
 #  # This analysis needs a multiphylo file:
@@ -229,7 +229,7 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Visual diagnostics
 #  sensi_plot(tree)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=4-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=4----------------
 #  # Load data:
 #  data(alien)
 #  # Logtransform data
@@ -238,14 +238,14 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  tree <- tree_physig(trait.col = "logMass", data = alien.data, phy = alien.phy, track=FALSE)
 #  summary(tree)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  sensi_plot(tree, graphs = 1)
 #  sensi_plot(tree, graphs = 2)
 
-## ----warning=FALSE, message=FALSE, fig.width=6, fig.height=4-------------
+## ----warning=FALSE, message=FALSE, fig.width=6, fig.height=4------------------
 #  sensi_plot(tree)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  # Load data:
 #  data("primates")
 #  # Model trait evolution accounting for phylogenetic uncertainty
@@ -257,16 +257,16 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # optimisation parameter
 #  summary(tree_cont)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  # Plot only some parameters
 #  sensi_plot(tree_cont,graphs="sigsq")
 #  sensi_plot(tree_cont,graphs="optpar")
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  ## Visual diagnostics
 #  sensi_plot(tree_cont)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  # Load data:
 #  data("primates")
 #  # Create a binary trait factor
@@ -280,15 +280,15 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # optimisation parameter
 #  summary(tree_binary)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  ## Visual diagnostics
 #  sensi_plot(tree_binary,graphs="q12")
 #  sensi_plot(tree_binary,graphs="q21")
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  sensi_plot(tree_binary)
 
-## ----warning=FALSE, message=FALSE, fig.width=6, fig.height=5-------------
+## ----warning=FALSE, message=FALSE, fig.width=6, fig.height=5------------------
 #  # run PGLS accounting for intraspecific variation:
 #  intra <- intra_phylm(gestaLen ~ adultMass, phy = alien$phy[[1]],
 #                       data = alien$data, Vy = "SD_gesta", Vx = "SD_mass",
@@ -298,21 +298,21 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Visual diagnostics
 #  sensi_plot(intra)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  data(alien)
 #  # Run sensitivity analysis:
 #  intra <- intra_physig(trait.col = "gestaLen", V = "SD_gesta" , data = alien.data,
 #                        phy = alien.phy[[1]], n.intra = 100, track=FALSE)
 #  summary(intra)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  sensi_plot(intra, graphs = 1)
 #  sensi_plot(intra, graphs = 2)
 
-## ----warning=FALSE, message=FALSE, fig.width=6, fig.height=4-------------
+## ----warning=FALSE, message=FALSE, fig.width=6, fig.height=4------------------
 #  sensi_plot(intra)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  data(alien)
 #  # run analysis:
 #  tree_influ <- tree_influ_phylm(log(gestaLen) ~ log(adultMass), phy = alien$phy,
@@ -320,15 +320,15 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # To check summary results:
 #  summary(tree_influ)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  # Visual diagnostics
 #  sensi_plot(tree_influ, graphs = 1)
 #  sensi_plot(tree_influ, graphs = 2)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  sensi_plot(tree_influ)
 
-## ----warning=FALSE, message=FALSE, fig.width=7, fig.height=4-------------
+## ----warning=FALSE, message=FALSE, fig.width=7, fig.height=4------------------
 #  data(primates)
 #  # run analysis:
 #  clade_tree <- tree_clade_phylm(log(sexMaturity) ~ log(adultMass),
@@ -338,16 +338,16 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # To check summary results and most influential clades:
 #  summary(clade_tree)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=5-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=5----------------
 #  # Visual diagnostics for clade removal:
 #  sensi_plot(clade_tree)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  # Specify which clade removal to plot:
 #  sensi_plot(clade_tree, "Cercopithecidae")
 #  sensi_plot(clade_tree, clade = "Cebidae")
 
-## ----warning=FALSE, message=FALSE, fig.width=6, fig.height=4-------------
+## ----warning=FALSE, message=FALSE, fig.width=6, fig.height=4------------------
 #  # Load data:
 #  data(alien)
 #  # Run analysis:
@@ -358,11 +358,11 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Visual diagnostics
 #  sensi_plot(samp)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  sensi_plot(samp, graphs = 1)
 #  sensi_plot(samp, graphs = 2)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  # Load data:
 #  data(alien)
 #  # run PGLS accounting for intraspecific and phylogenetic variation:
@@ -374,7 +374,7 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Visual diagnostics
 #  sensi_plot(intra.tree, uncer.type = "all") #or uncer.type = "tree", uncer.type = "intra"
 
-## ----warning=FALSE, message=FALSE----------------------------------------
+## ----warning=FALSE, message=FALSE---------------------------------------------
 #  library(sensiPhy)
 #  # Load data:
 #  data(alien)
@@ -385,15 +385,15 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Check combined data:
 #  knitr::kable(head(comp.data$data))
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  # Check phy:
 #  plot(comp.data$phy)
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  # See species dropped from phy or data:
 #  comp.data$dropped
 
-## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6-----------
+## ----warning=FALSE, message=FALSE, fig.width=7.5, fig.height=6----------------
 #  library(sensiPhy)
 #  # Load caper:
 #  library(caper)
@@ -401,7 +401,7 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  data(alien)
 #  knitr::kable(head(alien.data))
 
-## ----warning=FALSE, message=FALSE, fig.width=5, fig.height=4-------------
+## ----warning=FALSE, message=FALSE, fig.width=5, fig.height=4------------------
 #  data <- alien.data
 #  phy = alien.phy[[1]]
 #  
@@ -410,12 +410,12 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  print(homeNAsig)
 #  plot(homeNAsig)
 
-## ----warning=FALSE, message=FALSE, fig.width=5, fig.height=4-------------
+## ----warning=FALSE, message=FALSE, fig.width=5, fig.height=4------------------
 #  massNAsig <- miss.phylo.d(data, phy, binvar = adultMass)
 #  print(massNAsig)
 #  plot(massNAsig)
 
-## ----warning=FALSE, message=FALSE, fig.width=8, fig.height=4-------------
+## ----warning=FALSE, message=FALSE, fig.width=8, fig.height=4------------------
 #  library(sensiPhy)
 #  # Load data:
 #  data("primates")
@@ -426,7 +426,7 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Plot data
 #  sensi_plot(fit.ms)
 
-## ----warning=FALSE, message=FALSE, fig.width=8, fig.height=4-------------
+## ----warning=FALSE, message=FALSE, fig.width=8, fig.height=4------------------
 #  # Load data:
 #  data("primates")
 #  # Run analysis
@@ -436,7 +436,7 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # Plot data
 #  sensi_plot(fit.km)
 
-## ----warning=FALSE, message=FALSE, fig.width=8, fig.height=4-------------
+## ----warning=FALSE, message=FALSE, fig.width=8, fig.height=4------------------
 #  ### prepare dataset for caper pgls:
 #  library(caper)
 #  library(phytools)
@@ -492,7 +492,7 @@ knitr::include_graphics("sensiPhy_workflow_functions.png")
 #  # test for influential species:
 #  summary(del)
 
-## ----warning=FALSE, message=FALSE, fig.width=8, fig.height=4-------------
+## ----warning=FALSE, message=FALSE, fig.width=8, fig.height=4------------------
 #  
 #  # 2. phylogenetic signal:-------------------------------------------------------
 #  library(picante)

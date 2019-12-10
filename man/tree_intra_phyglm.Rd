@@ -4,9 +4,19 @@
 \alias{tree_intra_phyglm}
 \title{Interaction between phylogenetic uncertainty and intraspecific variability - Phylogenetic logistic Regression}
 \usage{
-tree_intra_phyglm(formula, data, phy, Vx = NULL, x.transf = NULL,
-  n.intra = 10, n.tree = 2, distrib = "normal", track = TRUE,
-  btol = 50, ...)
+tree_intra_phyglm(
+  formula,
+  data,
+  phy,
+  Vx = NULL,
+  x.transf = NULL,
+  n.intra = 10,
+  n.tree = 2,
+  distrib = "normal",
+  track = TRUE,
+  btol = 50,
+  ...
+)
 }
 \arguments{
 \item{formula}{The model formula: \code{response~predictor}.}
@@ -110,6 +120,12 @@ summary(intra.tree)
 sensi_plot(intra.tree, uncer.type = "all") #or uncer.type = "tree", uncer.type = "intra"
 }
 \references{
+Paterno, G. B., Penone, C. Werner, G. D. A. 
+\href{http://doi.wiley.com/10.1111/2041-210X.12990}{sensiPhy: 
+An r-package for sensitivity analysis in phylogenetic 
+comparative methods.} Methods in Ecology and Evolution 
+2018, 9(6):1461-1467
+
 Martinez, P. a., Zurano, J.P., Amado, T.F., Penone, C., Betancur-R, R., 
 Bidau, C.J. & Jacobina, U.P. (2015). Chromosomal diversity in tropical reef 
 fishes is related to body size and depth range. Molecular Phylogenetics and 

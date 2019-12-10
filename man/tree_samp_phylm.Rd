@@ -4,8 +4,17 @@
 \alias{tree_samp_phylm}
 \title{Interaction between phylogenetic uncertainty and sensitivity to species sampling - Phylogenetic Linear Regression}
 \usage{
-tree_samp_phylm(formula, data, phy, n.sim = 30, n.tree = 2,
-  breaks = seq(0.1, 0.5, 0.1), model = "lambda", track = TRUE, ...)
+tree_samp_phylm(
+  formula,
+  data,
+  phy,
+  n.sim = 30,
+  n.tree = 2,
+  breaks = seq(0.1, 0.5, 0.1),
+  model = "lambda",
+  track = TRUE,
+  ...
+)
 }
 \arguments{
 \item{formula}{The model formula}
@@ -104,16 +113,19 @@ sensi_plot(samp, graphs = 2)
 data(alien)
 # Run analysis:
 samp <- tree_samp_phylm(log(gestaLen) ~ log(adultMass), phy = alien$phy,
-                                    data = alien$data, n.tree = 2, n.sim=2)
+                                    data = alien$data, n.tree = 1, n.sim=1)
 summary(samp)
-head(samp$sensi.estimates)
 # Visual diagnostics
 sensi_plot(samp)
-sensi_plot(samp, graphs = 1)
-sensi_plot(samp, graphs = 2)
 }
 }
 \references{
+Paterno, G. B., Penone, C. Werner, G. D. A. 
+\href{http://doi.wiley.com/10.1111/2041-210X.12990}{sensiPhy: 
+An r-package for sensitivity analysis in phylogenetic 
+comparative methods.} Methods in Ecology and Evolution 
+2018, 9(6):1461-1467
+
 Werner, G.D.A., Cornwell, W.K., Sprent, J.I., Kattge, J. & Kiers, E.T. (2014).
 A single evolutionary innovation drives the deep evolution of symbiotic N2-fixation
 in angiosperms. Nature Communications, 5, 4087.

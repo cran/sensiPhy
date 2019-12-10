@@ -4,8 +4,16 @@
 \alias{tree_continuous}
 \title{Phylogenetic uncertainty - Trait Evolution Continuous Characters}
 \usage{
-tree_continuous(data, phy, n.tree = 10, model, bounds = list(),
-  n.cores = NULL, track = TRUE, ...)
+tree_continuous(
+  data,
+  phy,
+  n.tree = 10,
+  model,
+  bounds = list(),
+  n.cores = NULL,
+  track = TRUE,
+  ...
+)
 }
 \arguments{
 \item{data}{Data vector for a single continuous trait, with names matching tips in \code{phy}.}
@@ -90,6 +98,12 @@ sensi_plot(tree_cont2)
 }
 }
 \references{
+Paterno, G. B., Penone, C. Werner, G. D. A. 
+\href{http://doi.wiley.com/10.1111/2041-210X.12990}{sensiPhy: 
+An r-package for sensitivity analysis in phylogenetic 
+comparative methods.} Methods in Ecology and Evolution 
+2018, 9(6):1461-1467
+
 Yang Z. 2006. Computational Molecular Evolution. Oxford University Press: Oxford. 
 
 Harmon Luke J, Jason T Weir, Chad D Brock, Richard E Glor, and Wendell Challenger. 2008.

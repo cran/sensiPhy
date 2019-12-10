@@ -4,8 +4,17 @@
 \alias{tree_samp_phyglm}
 \title{Interaction between phylogenetic uncertainty and sensitivity to species sampling  - Phylogenetic Logistic Regression}
 \usage{
-tree_samp_phyglm(formula, data, phy, n.sim = 30, n.tree = 2,
-  breaks = seq(0.1, 0.5, 0.1), btol = 50, track = TRUE, ...)
+tree_samp_phyglm(
+  formula,
+  data,
+  phy,
+  n.sim = 30,
+  n.tree = 2,
+  breaks = seq(0.1, 0.5, 0.1),
+  btol = 50,
+  track = TRUE,
+  ...
+)
 }
 \arguments{
 \item{formula}{The model formula}
@@ -87,6 +96,7 @@ effect of species removal on p-values. Please also consult standardised differen
 in the (summary) output.
 }
 \examples{
+\dontrun{
 # Simulate Data:
 set.seed(6987)
 mphy = rmtree(100, N = 30)
@@ -101,7 +111,14 @@ sensi_plot(tree_samp)
 sensi_plot(tree_samp, graphs = 1)
 sensi_plot(tree_samp, graphs = 2)
 }
+}
 \references{
+Paterno, G. B., Penone, C. Werner, G. D. A. 
+\href{http://doi.wiley.com/10.1111/2041-210X.12990}{sensiPhy: 
+An r-package for sensitivity analysis in phylogenetic 
+comparative methods.} Methods in Ecology and Evolution 
+2018, 9(6):1461-1467
+
 Werner, G.D.A., Cornwell, W.K., Sprent, J.I., Kattge, J. & Kiers, E.T. (2014).
 A single evolutionary innovation drives the deep evolution of symbiotic N2-fixation
 in angiosperms. Nature Communications, 5, 4087.

@@ -60,7 +60,15 @@
 #' @author Gustavo Paterno, Caterina Penone & Gijsbert D.A. Werner
 #' @seealso \code{\link[phylolm]{phyloglm}}, \code{\link{tree_phyglm}},
 #' \code{\link{influ_phyglm}}, \code{\link{tree_influ_phyglm}}, \code{\link{sensi_plot}}
-#' @references Ho, L. S. T. and Ane, C. 2014. "A linear-time algorithm for 
+#' @references 
+#' 
+#' Paterno, G. B., Penone, C. Werner, G. D. A. 
+#' \href{http://doi.wiley.com/10.1111/2041-210X.12990}{sensiPhy: 
+#' An r-package for sensitivity analysis in phylogenetic 
+#' comparative methods.} Methods in Ecology and Evolution 
+#' 2018, 9(6):1461-1467
+#'
+#' Ho, L. S. T. and Ane, C. 2014. "A linear-time algorithm for 
 #' Gaussian and non-Gaussian trait evolution models". Systematic Biology 63(3):397-408.
 #' @examples 
 #' \dontrun{
@@ -80,84 +88,114 @@
 #'}
 #' @export
 
-tree_influ_phyglm <- function(formula, data, phy, n.tree = 2, 
-                                         cutoff = 2, btol = 50, track = TRUE,...) {
+tree_influ_phyglm <- function(formula,
+                              data,
+                              phy,
+                              n.tree = 2,
+                              cutoff = 2,
+                              btol = 50,
+                              track = TRUE,
+                              ...) {
   # Error checking:
-  if(!is.data.frame(data)) stop("data must be class 'data.frame'")
-  if(class(formula)!="formula") stop("formula must be class 'formula'")
-  if(class(phy)!="multiPhylo") stop("phy must be class 'multiPhylo'")
-  if(length(phy)<n.tree) stop("'times' must be smaller (or equal) than the number of trees in the 'multiPhylo' object")
+  if (!inherits(data, "data.frame"))
+    stop("data must be class 'data.frame'")
+  if (!inherits(formula, "formula"))
+    stop("formula must be class 'formula'")
+  if (!inherits(phy, "multiPhylo"))
+    stop("phy must be class 'multiPhylo'")
+  if (length(phy) < n.tree)
+    stop("'times' must be smaller (or equal) than the number of trees in the 'multiPhylo' object")
   else
-  
-  #Match data and phy
-  data_phy <- match_dataphy(formula, data, phy, ...)
+    
+    #Match data and phy
+    data_phy <- match_dataphy(formula, data, phy, ...)
   phy <- data_phy$phy
   full.data <- data_phy$data
   
   # If the class of tree is multiphylo pick n=n.tree random trees
-  trees<-sample(length(phy),n.tree,replace=F)
+  trees <- sample(length(phy), n.tree, replace = F)
   
   
   #List to store information
   tree.influ <- list ()
-  N  <- nrow(full.data)
   
   #Start tree loop here
-  errors <- NULL
-  if(track==TRUE) pb <- utils::txtProgressBar(min = 0, max = n.tree, style = 3)
+  
+  if (track == TRUE)
+    pb <- utils::txtProgressBar(min = 0, max = n.tree, style = 3)
   counter = 1
   
-  for (j in trees){
+  for (j in trees) {
     #Match data order to tip order
-    full.data <- full.data[phy[[j]]$tip.label,]
+    full.data <- full.data[phy[[j]]$tip.label, ]
     
     #Select tree
     tree <- phy[[j]]
     
-    tree.influ[[counter]] <- influ_phyglm(formula, data = full.data, phy=tree,
-                                   verbose = FALSE, track = FALSE,...)
+    tree.influ[[counter]] <-
+      influ_phyglm(
+        formula,
+        data = full.data,
+        phy = tree,
+        verbose = FALSE,
+        track = FALSE,
+        ...
+      )
     
-    if(track==TRUE) utils::setTxtProgressBar(pb, counter)
+    if (track == TRUE)
+      utils::setTxtProgressBar(pb, counter)
     counter = counter + 1
   }
   
-  if(track==TRUE) close(pb)
+  if (track == TRUE)
+    close(pb)
   names(tree.influ) <- trees
   
   # Merge lists into data.frames between iterations:
-  full.estimates  <- suppressWarnings(recombine(tree.influ, slot1 = 3, slot2 = 1))
+  full.estimates  <-
+    suppressWarnings(recombine(tree.influ, slot1 = 3, slot2 = 1))
   
   #influ species slope
-  influ.sp.estimate <- (lapply(tree.influ,function(x) x$influential.species$influ.sp.estimate))
+  influ.sp.estimate <-
+    (lapply(tree.influ, function(x)
+      x$influential.species$influ.sp.estimate))
   influ.sp.estimate <- as.data.frame(as.matrix(influ.sp.estimate))
   names(influ.sp.estimate) <- "influ.sp.estimate"
-  influ.sp.estimate$tree<-row.names(influ.sp.estimate)
+  influ.sp.estimate$tree <- row.names(influ.sp.estimate)
   
   #influ species intercept
-  influ.sp.intercept <- (lapply(tree.influ,function(x) x$influential.species$influ.sp.intercept))
+  influ.sp.intercept <-
+    (lapply(tree.influ, function(x)
+      x$influential.species$influ.sp.intercept))
   influ.sp.intercept <- as.data.frame(as.matrix(influ.sp.intercept))
   names(influ.sp.intercept) <- "influ.sp.intercept"
-  influ.sp.intercept$tree<-row.names(influ.sp.intercept)
+  influ.sp.intercept$tree <- row.names(influ.sp.intercept)
   
   #influ.estimates
   influ.estimates <- recombine(tree.influ, slot1 = 5)
   influ.estimates$info <- NULL
   
   #Generates output:
-  res <- list(call = match.call(),
-              cutoff=cutoff,
-              formula = formula,
-              full.model.estimates = full.estimates,
-              influential.species = list(influ.sp.estimate=influ.sp.estimate,influ.sp.intercept=influ.sp.intercept),
-              sensi.estimates = influ.estimates,
-              data = full.data)
+  res <- list(
+    call = match.call(),
+    cutoff = cutoff,
+    formula = formula,
+    full.model.estimates = full.estimates,
+    influential.species = list(
+      influ.sp.estimate = influ.sp.estimate,
+      influ.sp.intercept = influ.sp.intercept
+    ),
+    sensi.estimates = influ.estimates,
+    data = full.data
+  )
   
   
-  class(res) <- c("sensiTree_Influ","sensiTree_InfluL")
+  class(res) <- c("sensiTree_Influ", "sensiTree_InfluL")
   
   ### Warnings:
-  if (length(res$errors) >0){
-    warning("Some species deletion presented errors, please check: output$errors")}
+  if (length(res$errors) > 0) {
+    warning("Some species deletion presented errors, please check: output$errors")
+  }
   else {
     res$errors <- "No errors found."
   }

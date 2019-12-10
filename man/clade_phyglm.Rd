@@ -5,8 +5,17 @@
 \title{Estimate the impact on model estimates of phylogenetic logistic regression after 
 removing clades from the analysis.}
 \usage{
-clade_phyglm(formula, data, phy, btol = 50, track = TRUE, clade.col,
-  n.species = 5, n.sim = 100, ...)
+clade_phyglm(
+  formula,
+  data,
+  phy,
+  btol = 50,
+  track = TRUE,
+  clade.col,
+  n.species = 5,
+  n.sim = 100,
+  ...
+)
 }
 \arguments{
 \item{formula}{The model formula}
@@ -121,6 +130,12 @@ sensi_plot(clade, "D") #The clade with the largest effect on slope and intercept
 }
 }
 \references{
+Paterno, G. B., Penone, C. Werner, G. D. A. 
+\href{http://doi.wiley.com/10.1111/2041-210X.12990}{sensiPhy: 
+An r-package for sensitivity analysis in phylogenetic 
+comparative methods.} Methods in Ecology and Evolution 
+2018, 9(6):1461-1467
+
 Ho, L. S. T. and Ane, C. 2014. "A linear-time algorithm for 
 Gaussian and non-Gaussian trait evolution models". Systematic Biology 63(3):397-408.
 }
