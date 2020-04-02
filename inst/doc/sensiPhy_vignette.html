@@ -8,11 +8,11 @@
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Gustavo Paterno, Caterina Penone, Gijsbert Werner" />
 
-<meta name="date" content="2019-12-10" />
+<meta name="date" content="2020-04-02" />
 
 <title>sensiPhy: R-package for sensitivity analysis in phylogenetic comparative methods.</title>
 
@@ -37,7 +37,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -117,9 +117,6 @@ padding-right: 2em;
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 14px;
 line-height: 1.35;
-}
-#header {
-text-align: center;
 }
 #TOC {
 clear: both;
@@ -288,7 +285,8 @@ code > span.st { color: #d14; }
 code > span.co { color: #888888; font-style: italic; } 
 code > span.ot { color: #007020; } 
 code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -303,7 +301,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">sensiPhy: R-package for sensitivity analysis in phylogenetic comparative methods.</h1>
 <h4 class="author">Gustavo Paterno, Caterina Penone, Gijsbert Werner</h4>
-<h4 class="date">2019-12-10</h4>
+<h4 class="date">2020-04-02</h4>
 
 
 
@@ -343,79 +341,79 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>The <code>influ</code> method performs leave-one-out deletion analysis and detects influential species on parameter estimates.</p>
 <div id="influ_phylm-phylogenetic-linear-regression" class="section level5">
 <h5>1.1.1 influ_phylm(): Phylogenetic linear regression</h5>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(sensiPhy)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co"># run analysis:</span></a>
-<a class="sourceLine" id="cb1-3" title="3">influ &lt;-<span class="st"> </span><span class="kw">influ_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy[[<span class="dv">1</span>]], </a>
-<a class="sourceLine" id="cb1-4" title="4">                     <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">track=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(sensiPhy)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># run analysis:</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">influ &lt;-<span class="st"> </span><span class="kw">influ_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy[[<span class="dv">1</span>]], </a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">                     <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">track=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Note that <code>track = TRUE</code> shows the progress of the analysis</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># To check summary results:</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw">summary</span>(influ)</a>
-<a class="sourceLine" id="cb2-3" title="3"></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co"># Most influential species</span></a>
-<a class="sourceLine" id="cb2-5" title="5">influ<span class="op">$</span>influential.species</a>
-<a class="sourceLine" id="cb2-6" title="6"></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="kw">sensi_plot</span>(influ)</a></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Check most influential species on the original regression plot:</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="kw">sensi_plot</span>(influ, <span class="dt">graphs =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># To check summary results:</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">summary</span>(influ)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># Most influential species</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">influ<span class="op">$</span>influential.species</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw">sensi_plot</span>(influ)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Check most influential species on the original regression plot:</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">sensi_plot</span>(influ, <span class="dt">graphs =</span> <span class="dv">2</span>)</a></code></pre></div>
 </div>
 <div id="influ_physig-phylogenetic-signal" class="section level5">
 <h5>1.1.2. influ_physig(): Phylogenetic signal</h5>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Logtransform data</span></a>
-<a class="sourceLine" id="cb4-2" title="2">alien.data<span class="op">$</span>logMass &lt;-<span class="st"> </span><span class="kw">log</span>(alien.data<span class="op">$</span>adultMass)</a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="co"># Run sensitivity analysis:</span></a>
-<a class="sourceLine" id="cb4-4" title="4">influ &lt;-<span class="st"> </span><span class="kw">influ_physig</span>(<span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> alien.data, <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co"># You can change the method used to estimate signal:</span></a>
-<a class="sourceLine" id="cb4-6" title="6">influ2 &lt;-<span class="st"> </span><span class="kw">influ_physig</span>(<span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> alien.data, <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], <span class="dt">method =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb4-7" title="7"></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co"># To check summary results:</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="kw">summary</span>(influ)</a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="co"># Most influential speciesL</span></a>
-<a class="sourceLine" id="cb4-11" title="11">influ<span class="op">$</span>influential.species</a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="kw">sensi_plot</span>(influ)</a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="kw">sensi_plot</span>(influ2)</a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># You can specify which graph to print:</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw">sensi_plot</span>(influ, <span class="dt">graphs =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="kw">sensi_plot</span>(influ2, <span class="dt">graphs =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Logtransform data</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">alien.data<span class="op">$</span>logMass &lt;-<span class="st"> </span><span class="kw">log</span>(alien.data<span class="op">$</span>adultMass)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co"># Run sensitivity analysis:</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">influ &lt;-<span class="st"> </span><span class="kw">influ_physig</span>(<span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> alien.data, <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co"># You can change the method used to estimate signal:</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">influ2 &lt;-<span class="st"> </span><span class="kw">influ_physig</span>(<span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> alien.data, <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], <span class="dt">method =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co"># To check summary results:</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="kw">summary</span>(influ)</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co"># Most influential speciesL</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">influ<span class="op">$</span>influential.species</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="kw">sensi_plot</span>(influ)</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="kw">sensi_plot</span>(influ2)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># You can specify which graph to print:</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">sensi_plot</span>(influ, <span class="dt">graphs =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">sensi_plot</span>(influ2, <span class="dt">graphs =</span> <span class="dv">1</span>)</a></code></pre></div>
 </div>
 <div id="influ_continuous-and-influ_discrete-trait-evolution-continuous-and-discrete-characters" class="section level5">
 <h5>1.1.3 influ_continuous() and influ_discrete: Trait Evolution Continuous and Discrete Characters</h5>
 <p><strong>Continuous characters</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co"># Model trait evolution accounting for influential species</span></a>
-<a class="sourceLine" id="cb6-4" title="4">adultMass&lt;-primates<span class="op">$</span>data<span class="op">$</span>adultMass</a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="kw">names</span>(adultMass)&lt;-<span class="kw">rownames</span>(primates<span class="op">$</span>data)</a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co"># Model trait evolution accounting for influential species</span></a>
-<a class="sourceLine" id="cb6-7" title="7">influ_cont&lt;-<span class="kw">influ_continuous</span>(<span class="dt">data =</span> adultMass,<span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]],</a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="dt">model =</span> <span class="st">&quot;OU&quot;</span>,<span class="dt">cutoff =</span> <span class="dv">2</span>,<span class="dt">n.cores =</span> <span class="dv">2</span>,<span class="dt">track =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co"># Print summary statistics for the transitions rates, aic-values and (if applicable) </span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co"># optimisation parameter</span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="kw">summary</span>(influ_cont)</a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="kw">sensi_plot</span>(influ_cont)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co"># Model trait evolution accounting for influential species</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">adultMass&lt;-primates<span class="op">$</span>data<span class="op">$</span>adultMass</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">names</span>(adultMass)&lt;-<span class="kw">rownames</span>(primates<span class="op">$</span>data)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co"># Model trait evolution accounting for influential species</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">influ_cont&lt;-<span class="kw">influ_continuous</span>(<span class="dt">data =</span> adultMass,<span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]],</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="dt">model =</span> <span class="st">&quot;OU&quot;</span>,<span class="dt">cutoff =</span> <span class="dv">2</span>,<span class="dt">n.cores =</span> <span class="dv">2</span>,<span class="dt">track =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co"># Print summary statistics for the transitions rates, aic-values and (if applicable) </span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co"># optimisation parameter</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="kw">summary</span>(influ_cont)</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="kw">sensi_plot</span>(influ_cont)</a></code></pre></div>
 <p>Different evolutionary models from <code>fitContinuous</code> can be used: <code>BM</code>,<code>OU</code>, <code>EB</code>, <code>trend</code>, <code>lambda</code>, <code>kappa</code>, <code>delta</code> and <code>drift</code>.</p>
 <p><strong>Discrete characters</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
-<a class="sourceLine" id="cb7-3" title="3"></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="co"># Create a binary trait factor </span></a>
-<a class="sourceLine" id="cb7-5" title="5">adultMass_binary&lt;-<span class="kw">ifelse</span>(primates<span class="op">$</span>data<span class="op">$</span>adultMass <span class="op">&gt;</span><span class="st"> </span><span class="dv">7350</span>, <span class="st">&quot;big&quot;</span>, <span class="st">&quot;small&quot;</span>)</a>
-<a class="sourceLine" id="cb7-6" title="6">adultMass_binary&lt;-<span class="kw">as.factor</span>(<span class="kw">as.factor</span>(adultMass_binary))</a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="kw">names</span>(adultMass_binary)&lt;-<span class="kw">rownames</span>(primates<span class="op">$</span>data)</a>
-<a class="sourceLine" id="cb7-8" title="8"></a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="co"># Model trait evolution accounting for influential species - symmetric model</span></a>
-<a class="sourceLine" id="cb7-10" title="10">influ_binary &lt;-<span class="st"> </span><span class="kw">influ_discrete</span>(<span class="dt">data =</span> adultMass_binary, <span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]],</a>
-<a class="sourceLine" id="cb7-11" title="11"><span class="dt">model =</span> <span class="st">&quot;SYM&quot;</span>, <span class="dt">transform =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">cutoff =</span> <span class="dv">2</span>, <span class="dt">n.cores =</span> <span class="dv">2</span>, <span class="dt">track =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb7-12" title="12"></a>
-<a class="sourceLine" id="cb7-13" title="13"><span class="co"># Print summary statistics for the transition rates, aic-values and </span></a>
-<a class="sourceLine" id="cb7-14" title="14"><span class="co"># (if applicable) optimisation parameter</span></a>
-<a class="sourceLine" id="cb7-15" title="15"><span class="kw">summary</span>(influ_binary)</a>
-<a class="sourceLine" id="cb7-16" title="16"></a>
-<a class="sourceLine" id="cb7-17" title="17"><span class="co"># Visual diagnostics - in symmetrical model q12 and q21 are, as expected, </span></a>
-<a class="sourceLine" id="cb7-18" title="18"><span class="co"># exactly the same </span></a>
-<a class="sourceLine" id="cb7-19" title="19"><span class="kw">sensi_plot</span>(influ_binary)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># Create a binary trait factor </span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">adultMass_binary&lt;-<span class="kw">ifelse</span>(primates<span class="op">$</span>data<span class="op">$</span>adultMass <span class="op">&gt;</span><span class="st"> </span><span class="dv">7350</span>, <span class="st">&quot;big&quot;</span>, <span class="st">&quot;small&quot;</span>)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">adultMass_binary&lt;-<span class="kw">as.factor</span>(<span class="kw">as.factor</span>(adultMass_binary))</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw">names</span>(adultMass_binary)&lt;-<span class="kw">rownames</span>(primates<span class="op">$</span>data)</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co"># Model trait evolution accounting for influential species - symmetric model</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">influ_binary &lt;-<span class="st"> </span><span class="kw">influ_discrete</span>(<span class="dt">data =</span> adultMass_binary, <span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]],</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="dt">model =</span> <span class="st">&quot;SYM&quot;</span>, <span class="dt">transform =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">cutoff =</span> <span class="dv">2</span>, <span class="dt">n.cores =</span> <span class="dv">2</span>, <span class="dt">track =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co"># Print summary statistics for the transition rates, aic-values and </span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co"># (if applicable) optimisation parameter</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="kw">summary</span>(influ_binary)</a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co"># Visual diagnostics - in symmetrical model q12 and q21 are, as expected, </span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co"># exactly the same </span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="kw">sensi_plot</span>(influ_binary)</a></code></pre></div>
 <p>Different character models from <code>fitDiscrete</code> can be fit by changing the <code>model</code> argument. These include <code>ER</code> (equal-rates), <code>SYM</code> (symmetric), <code>ARD</code> (all-rates-different) and <code>meristic</code> (stepwise fashion). Similarly, all transformations to the phylogenetic tree from <code>fitDiscrete</code> can be used: <code>none</code>, <code>EB</code>, <code>lambda</code>, <code>kappa</code> and <code>delta</code>.</p>
 </div>
 </div>
@@ -425,58 +423,58 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="clade_phylm-phylogenetic-linear-regression" class="section level5">
 <h5>1.2.1 clade_phylm(): Phylogenetic linear regression</h5>
 <p>Additional arguments: <strong>clade.col</strong>: The name of a column in the provided data frame with clades specification (a character vector with clade names). <strong>n.species</strong>: Minimum number of species in the clade in order to include this clade in the leave-one-out deletion analysis. Default is 5. <strong>n.sim</strong>: The number of repetitions for the randomization test</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">data</span>(primates)</a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="co"># run analysis:</span></a>
-<a class="sourceLine" id="cb8-3" title="3">clade &lt;-<span class="st"> </span><span class="kw">clade_phylm</span>(<span class="kw">log</span>(sexMaturity) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]],</a>
-<a class="sourceLine" id="cb8-4" title="4">                     <span class="dt">data =</span> primates<span class="op">$</span>data, <span class="dt">clade.col =</span> <span class="st">&quot;family&quot;</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="co"># To check summary results and most influential clades:</span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="kw">summary</span>(clade)</a></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Visual diagnostics for clade removal:</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="kw">sensi_plot</span>(clade, <span class="st">&quot;Cercopithecidae&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">data</span>(primates)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># run analysis:</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">clade &lt;-<span class="st"> </span><span class="kw">clade_phylm</span>(<span class="kw">log</span>(sexMaturity) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]],</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">                     <span class="dt">data =</span> primates<span class="op">$</span>data, <span class="dt">clade.col =</span> <span class="st">&quot;family&quot;</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co"># To check summary results and most influential clades:</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="kw">summary</span>(clade)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Visual diagnostics for clade removal:</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">sensi_plot</span>(clade, <span class="st">&quot;Cercopithecidae&quot;</span>)</a></code></pre></div>
 <pre><code>sensi_plot(clade, &quot;Cebidae&quot;)</code></pre>
 </div>
 <div id="clade_physig-phylogenetic-signal" class="section level5">
 <h5>1.2.2 clade_physig(): Phylogenetic signal</h5>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Logtransform data</span></a>
-<a class="sourceLine" id="cb11-2" title="2">alien.data<span class="op">$</span>logMass &lt;-<span class="st"> </span><span class="kw">log</span>(alien.data<span class="op">$</span>adultMass)</a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="co"># Run sensitivity analysis:</span></a>
-<a class="sourceLine" id="cb11-4" title="4">clade &lt;-<span class="st"> </span><span class="kw">clade_physig</span>(<span class="dt">trait.col =</span> <span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> alien.data, <span class="dt">n.sim =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb11-5" title="5">                      <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], <span class="dt">clade.col =</span> <span class="st">&quot;family&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;K&quot;</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb11-6" title="6"><span class="kw">summary</span>(clade)</a>
-<a class="sourceLine" id="cb11-7" title="7"><span class="kw">sensi_plot</span>(clade, <span class="st">&quot;Bovidae&quot;</span>)</a>
-<a class="sourceLine" id="cb11-8" title="8"><span class="kw">sensi_plot</span>(clade, <span class="st">&quot;Sciuridae&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># Logtransform data</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">alien.data<span class="op">$</span>logMass &lt;-<span class="st"> </span><span class="kw">log</span>(alien.data<span class="op">$</span>adultMass)</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co"># Run sensitivity analysis:</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">clade &lt;-<span class="st"> </span><span class="kw">clade_physig</span>(<span class="dt">trait.col =</span> <span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> alien.data, <span class="dt">n.sim =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">                      <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], <span class="dt">clade.col =</span> <span class="st">&quot;family&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;K&quot;</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="kw">summary</span>(clade)</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="kw">sensi_plot</span>(clade, <span class="st">&quot;Bovidae&quot;</span>)</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="kw">sensi_plot</span>(clade, <span class="st">&quot;Sciuridae&quot;</span>)</a></code></pre></div>
 </div>
 <div id="clade_continuous-and-clade_discrete-trait-evolution-continuous-and-discrete-characters" class="section level5">
 <h5>1.2.3 clade_continuous() and clade_discrete: Trait Evolution Continuous and Discrete Characters</h5>
 <p><strong>Continuous characters</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb12-2" title="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
-<a class="sourceLine" id="cb12-3" title="3"><span class="co"># Model trait evolution accounting for influential clades</span></a>
-<a class="sourceLine" id="cb12-4" title="4">clade_cont &lt;-<span class="st"> </span><span class="kw">clade_continuous</span>(<span class="dt">data=</span>primates<span class="op">$</span>data, <span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]], </a>
-<a class="sourceLine" id="cb12-5" title="5"><span class="dt">model=</span><span class="st">&quot;OU&quot;</span>, <span class="dt">trait.col =</span> <span class="st">&quot;adultMass&quot;</span>, <span class="dt">clade.col=</span><span class="st">&quot;family&quot;</span>, <span class="dt">n.sim=</span><span class="dv">30</span>, <span class="dt">n.species=</span><span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb12-6" title="6"><span class="dt">n.cores =</span> <span class="dv">2</span>, <span class="dt">track=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb12-7" title="7"></a>
-<a class="sourceLine" id="cb12-8" title="8"><span class="co"># Check summary statistics for the transitions rates, aic-values and (if applicable) optimisation parameter</span></a>
-<a class="sourceLine" id="cb12-9" title="9"><span class="kw">summary</span>(clade_cont)</a>
-<a class="sourceLine" id="cb12-10" title="10"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb12-11" title="11"><span class="kw">sensi_plot</span>(clade_cont,<span class="dt">graph=</span><span class="st">&quot;all&quot;</span>)</a>
-<a class="sourceLine" id="cb12-12" title="12"><span class="co"># Plot only one clade and one parameter</span></a>
-<a class="sourceLine" id="cb12-13" title="13"><span class="kw">sensi_plot</span>(clade_cont,<span class="dt">clade=</span><span class="st">&quot;Cebidae&quot;</span>,<span class="dt">graph =</span> <span class="st">&quot;optpar&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co"># Model trait evolution accounting for influential clades</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">clade_cont &lt;-<span class="st"> </span><span class="kw">clade_continuous</span>(<span class="dt">data=</span>primates<span class="op">$</span>data, <span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]], </a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="dt">model=</span><span class="st">&quot;OU&quot;</span>, <span class="dt">trait.col =</span> <span class="st">&quot;adultMass&quot;</span>, <span class="dt">clade.col=</span><span class="st">&quot;family&quot;</span>, <span class="dt">n.sim=</span><span class="dv">30</span>, <span class="dt">n.species=</span><span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="dt">n.cores =</span> <span class="dv">2</span>, <span class="dt">track=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co"># Check summary statistics for the transitions rates, aic-values and (if applicable) optimisation parameter</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="kw">summary</span>(clade_cont)</a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="kw">sensi_plot</span>(clade_cont,<span class="dt">graph=</span><span class="st">&quot;all&quot;</span>)</a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co"># Plot only one clade and one parameter</span></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="kw">sensi_plot</span>(clade_cont,<span class="dt">clade=</span><span class="st">&quot;Cebidae&quot;</span>,<span class="dt">graph =</span> <span class="st">&quot;optpar&quot;</span>)</a></code></pre></div>
 <p><strong>Discrete characters</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
-<a class="sourceLine" id="cb13-3" title="3"></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="co"># Create a binary trait factor </span></a>
-<a class="sourceLine" id="cb13-5" title="5">primates<span class="op">$</span>data<span class="op">$</span>adultMass_binary&lt;-<span class="kw">ifelse</span>(primates<span class="op">$</span>data<span class="op">$</span>adultMass <span class="op">&gt;</span><span class="st"> </span><span class="dv">7350</span>, <span class="st">&quot;big&quot;</span>, <span class="st">&quot;small&quot;</span>)</a>
-<a class="sourceLine" id="cb13-6" title="6"><span class="co"># Model trait evolution accounting for influential clades</span></a>
-<a class="sourceLine" id="cb13-7" title="7">clade_disc &lt;-<span class="st"> </span><span class="kw">clade_discrete</span>(<span class="dt">data=</span>primates<span class="op">$</span>data,<span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]],</a>
-<a class="sourceLine" id="cb13-8" title="8">                             <span class="dt">model=</span><span class="st">&quot;ARD&quot;</span>,<span class="dt">transform=</span><span class="st">&quot;kappa&quot;</span>,</a>
-<a class="sourceLine" id="cb13-9" title="9">                             <span class="dt">trait.col =</span> <span class="st">&quot;adultMass_binary&quot;</span>, <span class="dt">clade.col =</span> <span class="st">&quot;family&quot;</span>,</a>
-<a class="sourceLine" id="cb13-10" title="10">                             <span class="dt">n.sim =</span> <span class="dv">30</span>, <span class="dt">n.species=</span><span class="dv">8</span>,<span class="dt">n.cores =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="co"># Check summary statistics:</span></a>
-<a class="sourceLine" id="cb13-12" title="12"><span class="kw">summary</span>(clade_disc)</a>
-<a class="sourceLine" id="cb13-13" title="13"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb13-14" title="14"><span class="kw">sensi_plot</span>(clade_disc)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co"># Create a binary trait factor </span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">primates<span class="op">$</span>data<span class="op">$</span>adultMass_binary&lt;-<span class="kw">ifelse</span>(primates<span class="op">$</span>data<span class="op">$</span>adultMass <span class="op">&gt;</span><span class="st"> </span><span class="dv">7350</span>, <span class="st">&quot;big&quot;</span>, <span class="st">&quot;small&quot;</span>)</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co"># Model trait evolution accounting for influential clades</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">clade_disc &lt;-<span class="st"> </span><span class="kw">clade_discrete</span>(<span class="dt">data=</span>primates<span class="op">$</span>data,<span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]],</a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">                             <span class="dt">model=</span><span class="st">&quot;ARD&quot;</span>,<span class="dt">transform=</span><span class="st">&quot;kappa&quot;</span>,</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">                             <span class="dt">trait.col =</span> <span class="st">&quot;adultMass_binary&quot;</span>, <span class="dt">clade.col =</span> <span class="st">&quot;family&quot;</span>,</a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">                             <span class="dt">n.sim =</span> <span class="dv">30</span>, <span class="dt">n.species=</span><span class="dv">8</span>,<span class="dt">n.cores =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co"># Check summary statistics:</span></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="kw">summary</span>(clade_disc)</a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="kw">sensi_plot</span>(clade_disc)</a></code></pre></div>
 </div>
 </div>
 <div id="sensitivity-analysis-for-sample-size" class="section level3">
@@ -490,86 +488,86 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <strong>breaks:</strong> A vector containing the percentages of species to remove<br />
 <strong>n.sim:</strong> The number of times species are randomly deleted for each break</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># run analysis:</span></a>
-<a class="sourceLine" id="cb14-2" title="2">samp &lt;-<span class="st"> </span><span class="kw">samp_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy[[<span class="dv">1</span>]], </a>
-<a class="sourceLine" id="cb14-3" title="3">                   <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">n.sim =</span> <span class="dv">50</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb14-4" title="4"></a>
-<a class="sourceLine" id="cb14-5" title="5"><span class="co"># You can change the number of repetitions and break intervals:</span></a>
-<a class="sourceLine" id="cb14-6" title="6">samp2 &lt;-<span class="st"> </span><span class="kw">samp_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy[[<span class="dv">1</span>]],</a>
-<a class="sourceLine" id="cb14-7" title="7">                    <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">n.sim =</span> <span class="dv">100</span>, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>), <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb14-8" title="8"><span class="co"># You can change the phylogenetic model:</span></a>
-<a class="sourceLine" id="cb14-9" title="9">samp3 &lt;-<span class="st"> </span><span class="kw">samp_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy[[<span class="dv">1</span>]], </a>
-<a class="sourceLine" id="cb14-10" title="10">                   <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">model =</span> <span class="st">&quot;kappa&quot;</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb14-11" title="11"><span class="co"># Check results:</span></a>
-<a class="sourceLine" id="cb14-12" title="12"><span class="kw">summary</span>(samp)</a></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="kw">sensi_plot</span>(samp)</a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="kw">sensi_plot</span>(samp2)</a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="kw">sensi_plot</span>(samp3)</a>
-<a class="sourceLine" id="cb15-5" title="5"></a>
-<a class="sourceLine" id="cb15-6" title="6"><span class="co"># You can specify which graph and parameter (&quot;slope&quot; or &quot;intercept&quot;) to print: </span></a>
-<a class="sourceLine" id="cb15-7" title="7"><span class="kw">sensi_plot</span>(samp2, <span class="dt">graphs =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb15-8" title="8"><span class="kw">sensi_plot</span>(samp2, <span class="dt">param =</span> <span class="st">&quot;intercept&quot;</span>)</a>
-<a class="sourceLine" id="cb15-9" title="9"><span class="kw">sensi_plot</span>(samp2, <span class="dt">graphs =</span> <span class="dv">2</span>, <span class="dt">param =</span> <span class="st">&quot;estimate&quot;</span>)</a>
-<a class="sourceLine" id="cb15-10" title="10"><span class="kw">sensi_plot</span>(samp)</a>
-<a class="sourceLine" id="cb15-11" title="11"><span class="kw">sensi_plot</span>(samp2, <span class="dt">graphs =</span> <span class="dv">1</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">sensi_plot</span>(samp)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># run analysis:</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">samp &lt;-<span class="st"> </span><span class="kw">samp_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy[[<span class="dv">1</span>]], </a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">                   <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">n.sim =</span> <span class="dv">50</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co"># You can change the number of repetitions and break intervals:</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">samp2 &lt;-<span class="st"> </span><span class="kw">samp_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy[[<span class="dv">1</span>]],</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">                    <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">n.sim =</span> <span class="dv">100</span>, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>), <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co"># You can change the phylogenetic model:</span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">samp3 &lt;-<span class="st"> </span><span class="kw">samp_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy[[<span class="dv">1</span>]], </a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">                   <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">model =</span> <span class="st">&quot;kappa&quot;</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb14-11" data-line-number="11"><span class="co"># Check results:</span></a>
+<a class="sourceLine" id="cb14-12" data-line-number="12"><span class="kw">summary</span>(samp)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">sensi_plot</span>(samp)</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">sensi_plot</span>(samp2)</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="kw">sensi_plot</span>(samp3)</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co"># You can specify which graph and parameter (&quot;slope&quot; or &quot;intercept&quot;) to print: </span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="kw">sensi_plot</span>(samp2, <span class="dt">graphs =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="kw">sensi_plot</span>(samp2, <span class="dt">param =</span> <span class="st">&quot;intercept&quot;</span>)</a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="kw">sensi_plot</span>(samp2, <span class="dt">graphs =</span> <span class="dv">2</span>, <span class="dt">param =</span> <span class="st">&quot;estimate&quot;</span>)</a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="kw">sensi_plot</span>(samp)</a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="kw">sensi_plot</span>(samp2, <span class="dt">graphs =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">sensi_plot</span>(samp)</a></code></pre></div>
 </div>
 <div id="samp_physig-phylogenetic-signal-k-or-lambda" class="section level3">
 <h3>1.3.2 samp_physig: Phylogenetic signal (k or lambda)</h3>
 <ul>
 <li>Additional arguments:<br />
-<strong>trait.col:</strong> The name of a column in the provided data frame with trait to be analyzed (e.g. “Body_mass”).<br />
+<strong>trait.col:</strong> The name of a column in the provided data frame with trait to be analyzed (e.g. “Body_mass”).<br />
 <strong>method:</strong> Method to compute phylogenetic signal: can be “K” or “lambda”.</li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># Logtransform data</span></a>
-<a class="sourceLine" id="cb17-2" title="2">alien.data<span class="op">$</span>logMass &lt;-<span class="st"> </span><span class="kw">log</span>(alien.data<span class="op">$</span>adultMass) </a>
-<a class="sourceLine" id="cb17-3" title="3"></a>
-<a class="sourceLine" id="cb17-4" title="4"><span class="co"># Run sensitivity analysis:</span></a>
-<a class="sourceLine" id="cb17-5" title="5">samp &lt;-<span class="st"> </span><span class="kw">samp_physig</span>(<span class="dt">trait.col =</span> <span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> alien.data, <span class="dt">n.sim =</span> <span class="dv">30</span>, <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb17-6" title="6"><span class="co"># You can change the method used to estimate signal:</span></a>
-<a class="sourceLine" id="cb17-7" title="7">samp2 &lt;-<span class="st"> </span><span class="kw">samp_physig</span>(<span class="dt">trait.col =</span> <span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> alien.data, <span class="dt">n.sim =</span> <span class="dv">30</span>,</a>
-<a class="sourceLine" id="cb17-8" title="8">                    <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], <span class="dt">method =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb17-9" title="9"><span class="co"># Check results:</span></a>
-<a class="sourceLine" id="cb17-10" title="10"><span class="kw">summary</span>(samp)</a>
-<a class="sourceLine" id="cb17-11" title="11"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb17-12" title="12"><span class="kw">sensi_plot</span>(samp)</a></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># More visual diagnostics</span></a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="kw">sensi_plot</span>(samp2)</a>
-<a class="sourceLine" id="cb18-3" title="3"><span class="kw">sensi_plot</span>(samp, <span class="dt">graphs =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># Logtransform data</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">alien.data<span class="op">$</span>logMass &lt;-<span class="st"> </span><span class="kw">log</span>(alien.data<span class="op">$</span>adultMass) </a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co"># Run sensitivity analysis:</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">samp &lt;-<span class="st"> </span><span class="kw">samp_physig</span>(<span class="dt">trait.col =</span> <span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> alien.data, <span class="dt">n.sim =</span> <span class="dv">30</span>, <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co"># You can change the method used to estimate signal:</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">samp2 &lt;-<span class="st"> </span><span class="kw">samp_physig</span>(<span class="dt">trait.col =</span> <span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> alien.data, <span class="dt">n.sim =</span> <span class="dv">30</span>,</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">                    <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], <span class="dt">method =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co"># Check results:</span></a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="kw">summary</span>(samp)</a>
+<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="kw">sensi_plot</span>(samp)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># More visual diagnostics</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">sensi_plot</span>(samp2)</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw">sensi_plot</span>(samp, <span class="dt">graphs =</span> <span class="dv">1</span>)</a></code></pre></div>
 </div>
 <div id="samp_continuous-and-samp_discrete-trait-evolution-continuous-and-discrete-characters" class="section level3">
 <h3>1.3.3 samp_continuous() and samp_discrete: Trait Evolution Continuous and Discrete Characters</h3>
 <p><strong>Continuous characters</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb19-2" title="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
-<a class="sourceLine" id="cb19-3" title="3"></a>
-<a class="sourceLine" id="cb19-4" title="4"><span class="co"># Model trait evolution</span></a>
-<a class="sourceLine" id="cb19-5" title="5">adultMass&lt;-primates<span class="op">$</span>data<span class="op">$</span>adultMass</a>
-<a class="sourceLine" id="cb19-6" title="6"><span class="kw">names</span>(adultMass)&lt;-<span class="kw">rownames</span>(primates<span class="op">$</span>data)</a>
-<a class="sourceLine" id="cb19-7" title="7">samp_cont&lt;-<span class="kw">samp_continuous</span>(<span class="dt">data =</span> adultMass,<span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]],</a>
-<a class="sourceLine" id="cb19-8" title="8"><span class="dt">model =</span> <span class="st">&quot;OU&quot;</span>,<span class="dt">n.sim=</span><span class="dv">25</span>,<span class="dt">breaks=</span><span class="kw">seq</span>(.<span class="dv">05</span>,.<span class="dv">2</span>,.<span class="dv">05</span>),<span class="dt">n.cores =</span> <span class="dv">2</span>, <span class="dt">track =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb19-9" title="9"><span class="co"># Print summary statistics for the transitions rates, aic-values and (if applicable) </span></a>
-<a class="sourceLine" id="cb19-10" title="10"><span class="co"># optimisation parameter</span></a>
-<a class="sourceLine" id="cb19-11" title="11"><span class="kw">summary</span>(samp_cont)</a>
-<a class="sourceLine" id="cb19-12" title="12"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb19-13" title="13"><span class="kw">sensi_plot</span>(samp_cont)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co"># Model trait evolution</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">adultMass&lt;-primates<span class="op">$</span>data<span class="op">$</span>adultMass</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="kw">names</span>(adultMass)&lt;-<span class="kw">rownames</span>(primates<span class="op">$</span>data)</a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">samp_cont&lt;-<span class="kw">samp_continuous</span>(<span class="dt">data =</span> adultMass,<span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]],</a>
+<a class="sourceLine" id="cb19-8" data-line-number="8"><span class="dt">model =</span> <span class="st">&quot;OU&quot;</span>,<span class="dt">n.sim=</span><span class="dv">25</span>,<span class="dt">breaks=</span><span class="kw">seq</span>(.<span class="dv">05</span>,.<span class="dv">2</span>,.<span class="dv">05</span>),<span class="dt">n.cores =</span> <span class="dv">2</span>, <span class="dt">track =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb19-9" data-line-number="9"><span class="co"># Print summary statistics for the transitions rates, aic-values and (if applicable) </span></a>
+<a class="sourceLine" id="cb19-10" data-line-number="10"><span class="co"># optimisation parameter</span></a>
+<a class="sourceLine" id="cb19-11" data-line-number="11"><span class="kw">summary</span>(samp_cont)</a>
+<a class="sourceLine" id="cb19-12" data-line-number="12"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb19-13" data-line-number="13"><span class="kw">sensi_plot</span>(samp_cont)</a></code></pre></div>
 <p><strong>Discrete characters</strong></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
-<a class="sourceLine" id="cb20-3" title="3"><span class="co"># Create a binary trait factor </span></a>
-<a class="sourceLine" id="cb20-4" title="4">adultMass_binary&lt;-<span class="kw">ifelse</span>(primates<span class="op">$</span>data<span class="op">$</span>adultMass <span class="op">&gt;</span><span class="st"> </span><span class="dv">7350</span>, <span class="st">&quot;big&quot;</span>, <span class="st">&quot;small&quot;</span>)</a>
-<a class="sourceLine" id="cb20-5" title="5">adultMass_binary&lt;-<span class="kw">as.factor</span>(<span class="kw">as.factor</span>(adultMass_binary))</a>
-<a class="sourceLine" id="cb20-6" title="6"><span class="kw">names</span>(adultMass_binary)&lt;-<span class="kw">rownames</span>(primates<span class="op">$</span>data)</a>
-<a class="sourceLine" id="cb20-7" title="7"><span class="co"># Model trait evolution</span></a>
-<a class="sourceLine" id="cb20-8" title="8">samp_binary &lt;-<span class="st"> </span><span class="kw">samp_discrete</span>(<span class="dt">data =</span> adultMass_binary,<span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]], <span class="dt">n.sim=</span><span class="dv">25</span>,</a>
-<a class="sourceLine" id="cb20-9" title="9">    <span class="dt">breaks =</span> <span class="kw">seq</span>(.<span class="dv">1</span>,.<span class="dv">3</span>,.<span class="dv">1</span>),<span class="dt">model =</span> <span class="st">&quot;ARD&quot;</span>, <span class="dt">transform =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">n.cores =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb20-10" title="10">    <span class="dt">track =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb20-11" title="11"><span class="co"># Print summary statistics for the transitions rates, aic-values and (if applicable) </span></a>
-<a class="sourceLine" id="cb20-12" title="12"><span class="co"># optimisation parameter</span></a>
-<a class="sourceLine" id="cb20-13" title="13"><span class="kw">summary</span>(samp_binary)</a>
-<a class="sourceLine" id="cb20-14" title="14"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb20-15" title="15"><span class="kw">sensi_plot</span>(samp_binary)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co"># Create a binary trait factor </span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">adultMass_binary&lt;-<span class="kw">ifelse</span>(primates<span class="op">$</span>data<span class="op">$</span>adultMass <span class="op">&gt;</span><span class="st"> </span><span class="dv">7350</span>, <span class="st">&quot;big&quot;</span>, <span class="st">&quot;small&quot;</span>)</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">adultMass_binary&lt;-<span class="kw">as.factor</span>(<span class="kw">as.factor</span>(adultMass_binary))</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="kw">names</span>(adultMass_binary)&lt;-<span class="kw">rownames</span>(primates<span class="op">$</span>data)</a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co"># Model trait evolution</span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8">samp_binary &lt;-<span class="st"> </span><span class="kw">samp_discrete</span>(<span class="dt">data =</span> adultMass_binary,<span class="dt">phy =</span> primates<span class="op">$</span>phy[[<span class="dv">1</span>]], <span class="dt">n.sim=</span><span class="dv">25</span>,</a>
+<a class="sourceLine" id="cb20-9" data-line-number="9">    <span class="dt">breaks =</span> <span class="kw">seq</span>(.<span class="dv">1</span>,.<span class="dv">3</span>,.<span class="dv">1</span>),<span class="dt">model =</span> <span class="st">&quot;ARD&quot;</span>, <span class="dt">transform =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">n.cores =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb20-10" data-line-number="10">    <span class="dt">track =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb20-11" data-line-number="11"><span class="co"># Print summary statistics for the transitions rates, aic-values and (if applicable) </span></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12"><span class="co"># optimisation parameter</span></a>
+<a class="sourceLine" id="cb20-13" data-line-number="13"><span class="kw">summary</span>(samp_binary)</a>
+<a class="sourceLine" id="cb20-14" data-line-number="14"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb20-15" data-line-number="15"><span class="kw">sensi_plot</span>(samp_binary)</a></code></pre></div>
 </div>
 </div>
 <div id="phylogenetic-uncertainty" class="section level2">
@@ -579,67 +577,67 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <strong>n.tree:</strong> Number of times to repeat the analysis with n different trees picked randomly in the multiPhylo file.</p>
 <div id="tree_phylm-tree-method-for-phylogenetic-linear-regression" class="section level3">
 <h3>2.1 tree_phylm: <code>tree</code> method for phylogenetic linear regression</h3>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># Load data</span></a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="kw">data</span>(alien)</a>
-<a class="sourceLine" id="cb21-3" title="3"><span class="co"># This analysis needs a multiphylo file:</span></a>
-<a class="sourceLine" id="cb21-4" title="4"><span class="kw">class</span>(alien<span class="op">$</span>phy)</a>
-<a class="sourceLine" id="cb21-5" title="5">alien<span class="op">$</span>phy</a>
-<a class="sourceLine" id="cb21-6" title="6"><span class="co"># run PGLS accounting for phylogenetic uncertainty:</span></a>
-<a class="sourceLine" id="cb21-7" title="7">tree &lt;-<span class="st"> </span><span class="kw">tree_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy, </a>
-<a class="sourceLine" id="cb21-8" title="8">                   <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">n.tree =</span> <span class="dv">30</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb21-9" title="9"><span class="co"># To check summary results:</span></a>
-<a class="sourceLine" id="cb21-10" title="10"><span class="kw">summary</span>(tree)</a>
-<a class="sourceLine" id="cb21-11" title="11"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb21-12" title="12"><span class="kw">sensi_plot</span>(tree)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># Load data</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw">data</span>(alien)</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="co"># This analysis needs a multiphylo file:</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="kw">class</span>(alien<span class="op">$</span>phy)</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">alien<span class="op">$</span>phy</a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="co"># run PGLS accounting for phylogenetic uncertainty:</span></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">tree &lt;-<span class="st"> </span><span class="kw">tree_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy, </a>
+<a class="sourceLine" id="cb21-8" data-line-number="8">                   <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">n.tree =</span> <span class="dv">30</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="co"># To check summary results:</span></a>
+<a class="sourceLine" id="cb21-10" data-line-number="10"><span class="kw">summary</span>(tree)</a>
+<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb21-12" data-line-number="12"><span class="kw">sensi_plot</span>(tree)</a></code></pre></div>
 </div>
 <div id="tree_physig-tree-method-for-phylogenetic-signal" class="section level3">
 <h3>2.2 tree_physig(): <code>tree</code> method for phylogenetic signal</h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="kw">data</span>(alien)</a>
-<a class="sourceLine" id="cb22-3" title="3"><span class="co"># Logtransform data</span></a>
-<a class="sourceLine" id="cb22-4" title="4">alien.data<span class="op">$</span>logMass &lt;-<span class="st"> </span><span class="kw">log</span>(alien.data<span class="op">$</span>adultMass) </a>
-<a class="sourceLine" id="cb22-5" title="5"><span class="co"># Run sensitivity analysis:</span></a>
-<a class="sourceLine" id="cb22-6" title="6">tree &lt;-<span class="st"> </span><span class="kw">tree_physig</span>(<span class="dt">trait.col =</span> <span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> alien.data, <span class="dt">phy =</span> alien.phy, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb22-7" title="7"><span class="kw">summary</span>(tree)</a></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">sensi_plot</span>(tree, <span class="dt">graphs =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb23-2" title="2"><span class="kw">sensi_plot</span>(tree, <span class="dt">graphs =</span> <span class="dv">2</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">sensi_plot</span>(tree) </a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw">data</span>(alien)</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="co"># Logtransform data</span></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">alien.data<span class="op">$</span>logMass &lt;-<span class="st"> </span><span class="kw">log</span>(alien.data<span class="op">$</span>adultMass) </a>
+<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="co"># Run sensitivity analysis:</span></a>
+<a class="sourceLine" id="cb22-6" data-line-number="6">tree &lt;-<span class="st"> </span><span class="kw">tree_physig</span>(<span class="dt">trait.col =</span> <span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> alien.data, <span class="dt">phy =</span> alien.phy, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="kw">summary</span>(tree)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">sensi_plot</span>(tree, <span class="dt">graphs =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw">sensi_plot</span>(tree, <span class="dt">graphs =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">sensi_plot</span>(tree) </a></code></pre></div>
 </div>
 <div id="tree_continuous-and-tree_discrete-tree-method-for-trait-evolution-of-continuous-and-discrete-characters" class="section level3">
 <h3>2.3 tree_continuous() and tree_discrete: <code>tree</code> method for trait evolution of continuous and discrete characters</h3>
 <p><strong>Continuous characters</strong></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb25-2" title="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
-<a class="sourceLine" id="cb25-3" title="3"><span class="co"># Model trait evolution accounting for phylogenetic uncertainty</span></a>
-<a class="sourceLine" id="cb25-4" title="4">adultMass&lt;-primates<span class="op">$</span>data<span class="op">$</span>adultMass</a>
-<a class="sourceLine" id="cb25-5" title="5"><span class="kw">names</span>(adultMass)&lt;-<span class="kw">rownames</span>(primates<span class="op">$</span>data)</a>
-<a class="sourceLine" id="cb25-6" title="6">tree_cont&lt;-<span class="kw">tree_continuous</span>(<span class="dt">data =</span> adultMass,<span class="dt">phy =</span> primates<span class="op">$</span>phy,</a>
-<a class="sourceLine" id="cb25-7" title="7"><span class="dt">model =</span> <span class="st">&quot;OU&quot;</span>,<span class="dt">n.tree=</span><span class="dv">30</span>,<span class="dt">n.cores =</span> <span class="dv">2</span>,<span class="dt">track =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb25-8" title="8"><span class="co"># Print summary statistics for the transitions rates, aic-values and (if applicable) </span></a>
-<a class="sourceLine" id="cb25-9" title="9"><span class="co"># optimisation parameter</span></a>
-<a class="sourceLine" id="cb25-10" title="10"><span class="kw">summary</span>(tree_cont)</a></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># Plot only some parameters</span></a>
-<a class="sourceLine" id="cb26-2" title="2"><span class="kw">sensi_plot</span>(tree_cont,<span class="dt">graphs=</span><span class="st">&quot;sigsq&quot;</span>)</a>
-<a class="sourceLine" id="cb26-3" title="3"><span class="kw">sensi_plot</span>(tree_cont,<span class="dt">graphs=</span><span class="st">&quot;optpar&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co">## Visual diagnostics</span></a>
-<a class="sourceLine" id="cb27-2" title="2"><span class="kw">sensi_plot</span>(tree_cont)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="co"># Model trait evolution accounting for phylogenetic uncertainty</span></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">adultMass&lt;-primates<span class="op">$</span>data<span class="op">$</span>adultMass</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="kw">names</span>(adultMass)&lt;-<span class="kw">rownames</span>(primates<span class="op">$</span>data)</a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">tree_cont&lt;-<span class="kw">tree_continuous</span>(<span class="dt">data =</span> adultMass,<span class="dt">phy =</span> primates<span class="op">$</span>phy,</a>
+<a class="sourceLine" id="cb25-7" data-line-number="7"><span class="dt">model =</span> <span class="st">&quot;OU&quot;</span>,<span class="dt">n.tree=</span><span class="dv">30</span>,<span class="dt">n.cores =</span> <span class="dv">2</span>,<span class="dt">track =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb25-8" data-line-number="8"><span class="co"># Print summary statistics for the transitions rates, aic-values and (if applicable) </span></a>
+<a class="sourceLine" id="cb25-9" data-line-number="9"><span class="co"># optimisation parameter</span></a>
+<a class="sourceLine" id="cb25-10" data-line-number="10"><span class="kw">summary</span>(tree_cont)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="co"># Plot only some parameters</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="kw">sensi_plot</span>(tree_cont,<span class="dt">graphs=</span><span class="st">&quot;sigsq&quot;</span>)</a>
+<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="kw">sensi_plot</span>(tree_cont,<span class="dt">graphs=</span><span class="st">&quot;optpar&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co">## Visual diagnostics</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw">sensi_plot</span>(tree_cont)</a></code></pre></div>
 <p><strong>Discrete characters</strong></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb28-2" title="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
-<a class="sourceLine" id="cb28-3" title="3"><span class="co"># Create a binary trait factor </span></a>
-<a class="sourceLine" id="cb28-4" title="4">adultMass_binary&lt;-<span class="kw">ifelse</span>(primates<span class="op">$</span>data<span class="op">$</span>adultMass <span class="op">&gt;</span><span class="st"> </span><span class="dv">7350</span>, <span class="st">&quot;big&quot;</span>, <span class="st">&quot;small&quot;</span>)</a>
-<a class="sourceLine" id="cb28-5" title="5">adultMass_binary&lt;-<span class="kw">as.factor</span>(<span class="kw">as.factor</span>(adultMass_binary))</a>
-<a class="sourceLine" id="cb28-6" title="6"><span class="kw">names</span>(adultMass_binary)&lt;-<span class="kw">rownames</span>(primates<span class="op">$</span>data)</a>
-<a class="sourceLine" id="cb28-7" title="7"><span class="co"># Model trait evolution accounting for phylogenetic uncertainty</span></a>
-<a class="sourceLine" id="cb28-8" title="8">tree_binary&lt;-<span class="kw">tree_discrete</span>(<span class="dt">data =</span> adultMass_binary,<span class="dt">phy =</span> primates<span class="op">$</span>phy,</a>
-<a class="sourceLine" id="cb28-9" title="9"><span class="dt">model =</span> <span class="st">&quot;ARD&quot;</span>,<span class="dt">transform =</span> <span class="st">&quot;none&quot;</span>,<span class="dt">n.tree =</span> <span class="dv">30</span>,<span class="dt">n.cores =</span> <span class="dv">2</span>,<span class="dt">track =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb28-10" title="10"><span class="co"># Print summary statistics for the transitions rates, aic-values and (if applicable) </span></a>
-<a class="sourceLine" id="cb28-11" title="11"><span class="co"># optimisation parameter</span></a>
-<a class="sourceLine" id="cb28-12" title="12"><span class="kw">summary</span>(tree_binary)</a></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="co">## Visual diagnostics</span></a>
-<a class="sourceLine" id="cb29-2" title="2"><span class="kw">sensi_plot</span>(tree_binary,<span class="dt">graphs=</span><span class="st">&quot;q12&quot;</span>)</a>
-<a class="sourceLine" id="cb29-3" title="3"><span class="kw">sensi_plot</span>(tree_binary,<span class="dt">graphs=</span><span class="st">&quot;q21&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">sensi_plot</span>(tree_binary)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="co"># Create a binary trait factor </span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">adultMass_binary&lt;-<span class="kw">ifelse</span>(primates<span class="op">$</span>data<span class="op">$</span>adultMass <span class="op">&gt;</span><span class="st"> </span><span class="dv">7350</span>, <span class="st">&quot;big&quot;</span>, <span class="st">&quot;small&quot;</span>)</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">adultMass_binary&lt;-<span class="kw">as.factor</span>(<span class="kw">as.factor</span>(adultMass_binary))</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6"><span class="kw">names</span>(adultMass_binary)&lt;-<span class="kw">rownames</span>(primates<span class="op">$</span>data)</a>
+<a class="sourceLine" id="cb28-7" data-line-number="7"><span class="co"># Model trait evolution accounting for phylogenetic uncertainty</span></a>
+<a class="sourceLine" id="cb28-8" data-line-number="8">tree_binary&lt;-<span class="kw">tree_discrete</span>(<span class="dt">data =</span> adultMass_binary,<span class="dt">phy =</span> primates<span class="op">$</span>phy,</a>
+<a class="sourceLine" id="cb28-9" data-line-number="9"><span class="dt">model =</span> <span class="st">&quot;ARD&quot;</span>,<span class="dt">transform =</span> <span class="st">&quot;none&quot;</span>,<span class="dt">n.tree =</span> <span class="dv">30</span>,<span class="dt">n.cores =</span> <span class="dv">2</span>,<span class="dt">track =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb28-10" data-line-number="10"><span class="co"># Print summary statistics for the transitions rates, aic-values and (if applicable) </span></a>
+<a class="sourceLine" id="cb28-11" data-line-number="11"><span class="co"># optimisation parameter</span></a>
+<a class="sourceLine" id="cb28-12" data-line-number="12"><span class="kw">summary</span>(tree_binary)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co">## Visual diagnostics</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw">sensi_plot</span>(tree_binary,<span class="dt">graphs=</span><span class="st">&quot;q12&quot;</span>)</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="kw">sensi_plot</span>(tree_binary,<span class="dt">graphs=</span><span class="st">&quot;q21&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">sensi_plot</span>(tree_binary)</a></code></pre></div>
 </div>
 </div>
 <div id="data-uncertainty" class="section level2">
@@ -654,27 +652,27 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <strong>y.transf:</strong> Transformation for the predictor variable (e.g. log or sqrt). Please use this argument instead of transforming data in the formula directly.<br />
 <strong>distrib:</strong> A character string indicating which distribution to use to generate a random value for the response and/or predictor variables. Default is normal distribution: “normal” (function rnorm). Uniform distribution: “uniform” (runif) Warning: we recommend to use normal distribution with Vx or Vy = standard deviation of the mean.<br />
 <strong>n.intra:</strong> Number of times to repeat the analysis with n different trees picked randomly in the multiPhylo file. If NULL, times = 2</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co"># run PGLS accounting for intraspecific variation:</span></a>
-<a class="sourceLine" id="cb31-2" title="2">intra &lt;-<span class="st"> </span><span class="kw">intra_phylm</span>(gestaLen <span class="op">~</span><span class="st"> </span>adultMass, <span class="dt">phy =</span> alien<span class="op">$</span>phy[[<span class="dv">1</span>]], </a>
-<a class="sourceLine" id="cb31-3" title="3">                     <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">Vy =</span> <span class="st">&quot;SD_gesta&quot;</span>, <span class="dt">Vx =</span> <span class="st">&quot;SD_mass&quot;</span>,</a>
-<a class="sourceLine" id="cb31-4" title="4">                     <span class="dt">n.intra =</span> <span class="dv">100</span>, <span class="dt">x.transf =</span> log, <span class="dt">y.transf =</span> log, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb31-5" title="5"><span class="co"># To check summary results:</span></a>
-<a class="sourceLine" id="cb31-6" title="6"><span class="kw">summary</span>(intra)</a>
-<a class="sourceLine" id="cb31-7" title="7"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb31-8" title="8"><span class="kw">sensi_plot</span>(intra)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># run PGLS accounting for intraspecific variation:</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">intra &lt;-<span class="st"> </span><span class="kw">intra_phylm</span>(gestaLen <span class="op">~</span><span class="st"> </span>adultMass, <span class="dt">phy =</span> alien<span class="op">$</span>phy[[<span class="dv">1</span>]], </a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">                     <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">Vy =</span> <span class="st">&quot;SD_gesta&quot;</span>, <span class="dt">Vx =</span> <span class="st">&quot;SD_mass&quot;</span>,</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">                     <span class="dt">n.intra =</span> <span class="dv">100</span>, <span class="dt">x.transf =</span> log, <span class="dt">y.transf =</span> log, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb31-5" data-line-number="5"><span class="co"># To check summary results:</span></a>
+<a class="sourceLine" id="cb31-6" data-line-number="6"><span class="kw">summary</span>(intra)</a>
+<a class="sourceLine" id="cb31-7" data-line-number="7"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb31-8" data-line-number="8"><span class="kw">sensi_plot</span>(intra)</a></code></pre></div>
 </div>
 <div id="intra_physig-intra-method-for-phylogenetic-signal" class="section level3">
 <h3>3.2 intra_physig(): <code>intra</code> method for phylogenetic signal</h3>
 <p>Additional arguments:<br />
 <strong>V</strong>: Name of the column containing the standard deviation or the standard error of the trait variable. When information is not available for one taxon, the value can be 0 or NA.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">data</span>(alien)</a>
-<a class="sourceLine" id="cb32-2" title="2"><span class="co"># Run sensitivity analysis:</span></a>
-<a class="sourceLine" id="cb32-3" title="3">intra &lt;-<span class="st"> </span><span class="kw">intra_physig</span>(<span class="dt">trait.col =</span> <span class="st">&quot;gestaLen&quot;</span>, <span class="dt">V =</span> <span class="st">&quot;SD_gesta&quot;</span> , <span class="dt">data =</span> alien.data, </a>
-<a class="sourceLine" id="cb32-4" title="4">                      <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], <span class="dt">n.intra =</span> <span class="dv">100</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb32-5" title="5"><span class="kw">summary</span>(intra)</a></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">sensi_plot</span>(intra, <span class="dt">graphs =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb33-2" title="2"><span class="kw">sensi_plot</span>(intra, <span class="dt">graphs =</span> <span class="dv">2</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">sensi_plot</span>(intra)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">data</span>(alien)</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="co"># Run sensitivity analysis:</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">intra &lt;-<span class="st"> </span><span class="kw">intra_physig</span>(<span class="dt">trait.col =</span> <span class="st">&quot;gestaLen&quot;</span>, <span class="dt">V =</span> <span class="st">&quot;SD_gesta&quot;</span> , <span class="dt">data =</span> alien.data, </a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">                      <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], <span class="dt">n.intra =</span> <span class="dv">100</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5"><span class="kw">summary</span>(intra)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">sensi_plot</span>(intra, <span class="dt">graphs =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="kw">sensi_plot</span>(intra, <span class="dt">graphs =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">sensi_plot</span>(intra)</a></code></pre></div>
 </div>
 </div>
 <div id="interacting-uncertainties" class="section level2">
@@ -686,59 +684,59 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h3>Examples:</h3>
 <div id="tree_influ_phylm-tree_influ-method-for-phylogenetic-linear-regression" class="section level4">
 <h4>4.1 tree_influ_phylm(): <code>tree_influ</code> method for phylogenetic linear regression</h4>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">data</span>(alien)</a>
-<a class="sourceLine" id="cb35-2" title="2"><span class="co"># run analysis:</span></a>
-<a class="sourceLine" id="cb35-3" title="3">tree_influ &lt;-<span class="st"> </span><span class="kw">tree_influ_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy, </a>
-<a class="sourceLine" id="cb35-4" title="4">                               <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">n.tree =</span> <span class="dv">5</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb35-5" title="5"><span class="co"># To check summary results:</span></a>
-<a class="sourceLine" id="cb35-6" title="6"><span class="kw">summary</span>(tree_influ)</a></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb36-2" title="2"><span class="kw">sensi_plot</span>(tree_influ, <span class="dt">graphs =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb36-3" title="3"><span class="kw">sensi_plot</span>(tree_influ, <span class="dt">graphs =</span> <span class="dv">2</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">sensi_plot</span>(tree_influ)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">data</span>(alien)</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="co"># run analysis:</span></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">tree_influ &lt;-<span class="st"> </span><span class="kw">tree_influ_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy, </a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">                               <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">n.tree =</span> <span class="dv">5</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="co"># To check summary results:</span></a>
+<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="kw">summary</span>(tree_influ)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw">sensi_plot</span>(tree_influ, <span class="dt">graphs =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="kw">sensi_plot</span>(tree_influ, <span class="dt">graphs =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">sensi_plot</span>(tree_influ)</a></code></pre></div>
 </div>
 <div id="tree_clade_phylm-tree_clade-method-for-phylogenetic-linear-regression" class="section level4">
 <h4>4.2 tree_clade_phylm(): <code>tree_clade</code> method for phylogenetic linear regression</h4>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">data</span>(primates)</a>
-<a class="sourceLine" id="cb38-2" title="2"><span class="co"># run analysis:</span></a>
-<a class="sourceLine" id="cb38-3" title="3">clade_tree &lt;-<span class="st"> </span><span class="kw">tree_clade_phylm</span>(<span class="kw">log</span>(sexMaturity) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), </a>
-<a class="sourceLine" id="cb38-4" title="4">                               <span class="dt">phy =</span> primates<span class="op">$</span>phy, <span class="dt">data =</span> primates<span class="op">$</span>data,</a>
-<a class="sourceLine" id="cb38-5" title="5">                               <span class="dt">clade.col =</span> <span class="st">&quot;family&quot;</span>,</a>
-<a class="sourceLine" id="cb38-6" title="6">                               <span class="dt">n.sim =</span> <span class="dv">50</span>, <span class="dt">n.tree =</span> <span class="dv">5</span>, <span class="dt">track=</span>F)</a>
-<a class="sourceLine" id="cb38-7" title="7"><span class="co"># To check summary results and most influential clades:</span></a>
-<a class="sourceLine" id="cb38-8" title="8"><span class="kw">summary</span>(clade_tree)</a></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="co"># Visual diagnostics for clade removal:</span></a>
-<a class="sourceLine" id="cb39-2" title="2"><span class="kw">sensi_plot</span>(clade_tree)</a></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="co"># Specify which clade removal to plot:</span></a>
-<a class="sourceLine" id="cb40-2" title="2"><span class="kw">sensi_plot</span>(clade_tree, <span class="st">&quot;Cercopithecidae&quot;</span>)</a>
-<a class="sourceLine" id="cb40-3" title="3"><span class="kw">sensi_plot</span>(clade_tree, <span class="dt">clade =</span> <span class="st">&quot;Cebidae&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">data</span>(primates)</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="co"># run analysis:</span></a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">clade_tree &lt;-<span class="st"> </span><span class="kw">tree_clade_phylm</span>(<span class="kw">log</span>(sexMaturity) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), </a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">                               <span class="dt">phy =</span> primates<span class="op">$</span>phy, <span class="dt">data =</span> primates<span class="op">$</span>data,</a>
+<a class="sourceLine" id="cb38-5" data-line-number="5">                               <span class="dt">clade.col =</span> <span class="st">&quot;family&quot;</span>,</a>
+<a class="sourceLine" id="cb38-6" data-line-number="6">                               <span class="dt">n.sim =</span> <span class="dv">50</span>, <span class="dt">n.tree =</span> <span class="dv">5</span>, <span class="dt">track=</span>F)</a>
+<a class="sourceLine" id="cb38-7" data-line-number="7"><span class="co"># To check summary results and most influential clades:</span></a>
+<a class="sourceLine" id="cb38-8" data-line-number="8"><span class="kw">summary</span>(clade_tree)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># Visual diagnostics for clade removal:</span></a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw">sensi_plot</span>(clade_tree)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># Specify which clade removal to plot:</span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw">sensi_plot</span>(clade_tree, <span class="st">&quot;Cercopithecidae&quot;</span>)</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="kw">sensi_plot</span>(clade_tree, <span class="dt">clade =</span> <span class="st">&quot;Cebidae&quot;</span>)</a></code></pre></div>
 </div>
 <div id="tree_samp_phylm-tree_samp-method-for-phylogenetic-linear-regression" class="section level4">
 <h4>4.3 tree_samp_phylm(): <code>tree_samp</code> method for phylogenetic linear regression</h4>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb41-2" title="2"><span class="kw">data</span>(alien)</a>
-<a class="sourceLine" id="cb41-3" title="3"><span class="co"># Run analysis:</span></a>
-<a class="sourceLine" id="cb41-4" title="4">samp &lt;-<span class="st"> </span><span class="kw">tree_samp_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy,</a>
-<a class="sourceLine" id="cb41-5" title="5">                        <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">n.tree =</span> <span class="dv">5</span>, <span class="dt">n.sim=</span><span class="dv">30</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb41-6" title="6"><span class="kw">summary</span>(samp)</a>
-<a class="sourceLine" id="cb41-7" title="7"><span class="kw">head</span>(samp<span class="op">$</span>sensi.estimates)</a>
-<a class="sourceLine" id="cb41-8" title="8"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb41-9" title="9"><span class="kw">sensi_plot</span>(samp)</a></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">sensi_plot</span>(samp, <span class="dt">graphs =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb42-2" title="2"><span class="kw">sensi_plot</span>(samp, <span class="dt">graphs =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw">data</span>(alien)</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="co"># Run analysis:</span></a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">samp &lt;-<span class="st"> </span><span class="kw">tree_samp_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> alien<span class="op">$</span>phy,</a>
+<a class="sourceLine" id="cb41-5" data-line-number="5">                        <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">n.tree =</span> <span class="dv">5</span>, <span class="dt">n.sim=</span><span class="dv">30</span>, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb41-6" data-line-number="6"><span class="kw">summary</span>(samp)</a>
+<a class="sourceLine" id="cb41-7" data-line-number="7"><span class="kw">head</span>(samp<span class="op">$</span>sensi.estimates)</a>
+<a class="sourceLine" id="cb41-8" data-line-number="8"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb41-9" data-line-number="9"><span class="kw">sensi_plot</span>(samp)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">sensi_plot</span>(samp, <span class="dt">graphs =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw">sensi_plot</span>(samp, <span class="dt">graphs =</span> <span class="dv">2</span>)</a></code></pre></div>
 </div>
 <div id="tree_intra_phylm-tree_intra-method-for-phylogenetic-linear-regression" class="section level4">
 <h4>4.4 tree_intra_phylm(): <code>tree_intra</code> method for phylogenetic linear regression</h4>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="kw">data</span>(alien)</a>
-<a class="sourceLine" id="cb43-3" title="3"><span class="co"># run PGLS accounting for intraspecific and phylogenetic variation:</span></a>
-<a class="sourceLine" id="cb43-4" title="4">intra.tree &lt;-<span class="st"> </span><span class="kw">tree_intra_phylm</span>(gestaLen <span class="op">~</span><span class="st"> </span>adultMass, <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">phy =</span> alien<span class="op">$</span>phy,</a>
-<a class="sourceLine" id="cb43-5" title="5">                               <span class="dt">Vy =</span> <span class="st">&quot;SD_gesta&quot;</span>, <span class="dt">n.intra =</span> <span class="dv">10</span>, <span class="dt">n.tree =</span> <span class="dv">30</span>, </a>
-<a class="sourceLine" id="cb43-6" title="6">                               <span class="dt">y.transf =</span> log, <span class="dt">x.transf =</span> log, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb43-7" title="7"><span class="co"># To check summary results:</span></a>
-<a class="sourceLine" id="cb43-8" title="8"><span class="kw">summary</span>(intra.tree)</a>
-<a class="sourceLine" id="cb43-9" title="9"><span class="co"># Visual diagnostics</span></a>
-<a class="sourceLine" id="cb43-10" title="10"><span class="kw">sensi_plot</span>(intra.tree, <span class="dt">uncer.type =</span> <span class="st">&quot;all&quot;</span>) <span class="co">#or uncer.type = &quot;tree&quot;, uncer.type = &quot;intra&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="kw">data</span>(alien)</a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="co"># run PGLS accounting for intraspecific and phylogenetic variation:</span></a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">intra.tree &lt;-<span class="st"> </span><span class="kw">tree_intra_phylm</span>(gestaLen <span class="op">~</span><span class="st"> </span>adultMass, <span class="dt">data =</span> alien<span class="op">$</span>data, <span class="dt">phy =</span> alien<span class="op">$</span>phy,</a>
+<a class="sourceLine" id="cb43-5" data-line-number="5">                               <span class="dt">Vy =</span> <span class="st">&quot;SD_gesta&quot;</span>, <span class="dt">n.intra =</span> <span class="dv">10</span>, <span class="dt">n.tree =</span> <span class="dv">30</span>, </a>
+<a class="sourceLine" id="cb43-6" data-line-number="6">                               <span class="dt">y.transf =</span> log, <span class="dt">x.transf =</span> log, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb43-7" data-line-number="7"><span class="co"># To check summary results:</span></a>
+<a class="sourceLine" id="cb43-8" data-line-number="8"><span class="kw">summary</span>(intra.tree)</a>
+<a class="sourceLine" id="cb43-9" data-line-number="9"><span class="co"># Visual diagnostics</span></a>
+<a class="sourceLine" id="cb43-10" data-line-number="10"><span class="kw">sensi_plot</span>(intra.tree, <span class="dt">uncer.type =</span> <span class="st">&quot;all&quot;</span>) <span class="co">#or uncer.type = &quot;tree&quot;, uncer.type = &quot;intra&quot;</span></a></code></pre></div>
 </div>
 </div>
 </div>
@@ -750,19 +748,19 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <blockquote>
 <p>This function uses all variables provided in the ‘formula’ to match data and phylogeny. To avoid cropping the full dataset, ‘match_dataphy’ searches for NA values only on variables provided by formula. Missing values on other variables, not included in ‘formula’, will not be removed from data.</p>
 </blockquote>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">library</span>(sensiPhy)</a>
-<a class="sourceLine" id="cb44-2" title="2"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb44-3" title="3"><span class="kw">data</span>(alien)</a>
-<a class="sourceLine" id="cb44-4" title="4"><span class="co"># Match data and phy based on model formula:</span></a>
-<a class="sourceLine" id="cb44-5" title="5">comp.data &lt;-<span class="st"> </span><span class="kw">match_dataphy</span>(gestaLen <span class="op">~</span><span class="st"> </span>homeRange, <span class="dt">data =</span> alien<span class="op">$</span>data, alien<span class="op">$</span>phy[[<span class="dv">1</span>]], <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb44-6" title="6"><span class="co"># With a `multiphylo` tree:</span></a>
-<a class="sourceLine" id="cb44-7" title="7">comp.data2 &lt;-<span class="st"> </span><span class="kw">match_dataphy</span>(homeRange <span class="op">~</span><span class="st"> </span>homeRange, <span class="dt">data =</span> alien<span class="op">$</span>data, alien<span class="op">$</span>phy, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb44-8" title="8"><span class="co"># Check combined data:</span></a>
-<a class="sourceLine" id="cb44-9" title="9">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(comp.data<span class="op">$</span>data))</a></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co"># Check phy:</span></a>
-<a class="sourceLine" id="cb45-2" title="2"><span class="kw">plot</span>(comp.data<span class="op">$</span>phy)</a></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="co"># See species dropped from phy or data:</span></a>
-<a class="sourceLine" id="cb46-2" title="2">comp.data<span class="op">$</span>dropped</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">library</span>(sensiPhy)</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="kw">data</span>(alien)</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4"><span class="co"># Match data and phy based on model formula:</span></a>
+<a class="sourceLine" id="cb44-5" data-line-number="5">comp.data &lt;-<span class="st"> </span><span class="kw">match_dataphy</span>(gestaLen <span class="op">~</span><span class="st"> </span>homeRange, <span class="dt">data =</span> alien<span class="op">$</span>data, alien<span class="op">$</span>phy[[<span class="dv">1</span>]], <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb44-6" data-line-number="6"><span class="co"># With a `multiphylo` tree:</span></a>
+<a class="sourceLine" id="cb44-7" data-line-number="7">comp.data2 &lt;-<span class="st"> </span><span class="kw">match_dataphy</span>(homeRange <span class="op">~</span><span class="st"> </span>homeRange, <span class="dt">data =</span> alien<span class="op">$</span>data, alien<span class="op">$</span>phy, <span class="dt">track=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb44-8" data-line-number="8"><span class="co"># Check combined data:</span></a>
+<a class="sourceLine" id="cb44-9" data-line-number="9">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(comp.data<span class="op">$</span>data))</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="co"># Check phy:</span></a>
+<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="kw">plot</span>(comp.data<span class="op">$</span>phy)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># See species dropped from phy or data:</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">comp.data<span class="op">$</span>dropped</a></code></pre></div>
 </div>
 <div id="phylogenetic-signal-for-missing-data" class="section level3">
 <h3>5.2 Phylogenetic signal for missing data</h3>
@@ -773,22 +771,22 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </div>
 <div id="example" class="section level4">
 <h4>Example:</h4>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">library</span>(sensiPhy)</a>
-<a class="sourceLine" id="cb47-2" title="2"><span class="co"># Load caper:</span></a>
-<a class="sourceLine" id="cb47-3" title="3"><span class="kw">library</span>(caper)</a>
-<a class="sourceLine" id="cb47-4" title="4"><span class="co"># Load data</span></a>
-<a class="sourceLine" id="cb47-5" title="5"><span class="kw">data</span>(alien)</a>
-<a class="sourceLine" id="cb47-6" title="6">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(alien.data))</a></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">data &lt;-<span class="st"> </span>alien.data</a>
-<a class="sourceLine" id="cb48-2" title="2">phy =<span class="st"> </span>alien.phy[[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb48-3" title="3"></a>
-<a class="sourceLine" id="cb48-4" title="4"><span class="co"># Test phylogenetic signal for missing data:</span></a>
-<a class="sourceLine" id="cb48-5" title="5">homeNAsig &lt;-<span class="st"> </span><span class="kw">miss.phylo.d</span>(data, phy, <span class="dt">binvar =</span> homeRange)</a>
-<a class="sourceLine" id="cb48-6" title="6"><span class="kw">print</span>(homeNAsig)</a>
-<a class="sourceLine" id="cb48-7" title="7"><span class="kw">plot</span>(homeNAsig)</a></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">massNAsig &lt;-<span class="st"> </span><span class="kw">miss.phylo.d</span>(data, phy, <span class="dt">binvar =</span> adultMass)</a>
-<a class="sourceLine" id="cb49-2" title="2"><span class="kw">print</span>(massNAsig)</a>
-<a class="sourceLine" id="cb49-3" title="3"><span class="kw">plot</span>(massNAsig)</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">library</span>(sensiPhy)</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="co"># Load caper:</span></a>
+<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="kw">library</span>(caper)</a>
+<a class="sourceLine" id="cb47-4" data-line-number="4"><span class="co"># Load data</span></a>
+<a class="sourceLine" id="cb47-5" data-line-number="5"><span class="kw">data</span>(alien)</a>
+<a class="sourceLine" id="cb47-6" data-line-number="6">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(alien.data))</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">data &lt;-<span class="st"> </span>alien.data</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">phy =<span class="st"> </span>alien.phy[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb48-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb48-4" data-line-number="4"><span class="co"># Test phylogenetic signal for missing data:</span></a>
+<a class="sourceLine" id="cb48-5" data-line-number="5">homeNAsig &lt;-<span class="st"> </span><span class="kw">miss.phylo.d</span>(data, phy, <span class="dt">binvar =</span> homeRange)</a>
+<a class="sourceLine" id="cb48-6" data-line-number="6"><span class="kw">print</span>(homeNAsig)</a>
+<a class="sourceLine" id="cb48-7" data-line-number="7"><span class="kw">plot</span>(homeNAsig)</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">massNAsig &lt;-<span class="st"> </span><span class="kw">miss.phylo.d</span>(data, phy, <span class="dt">binvar =</span> adultMass)</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="kw">print</span>(massNAsig)</a>
+<a class="sourceLine" id="cb49-3" data-line-number="3"><span class="kw">plot</span>(massNAsig)</a></code></pre></div>
 </div>
 </div>
 <div id="diversification-and-speciation-rates" class="section level3">
@@ -800,24 +798,24 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="examples-1" class="section level4">
 <h4>Examples:</h4>
 <p><em>To estimate diversification rate with Magallon and Sanderson method</em></p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">library</span>(sensiPhy)</a>
-<a class="sourceLine" id="cb50-2" title="2"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb50-3" title="3"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
-<a class="sourceLine" id="cb50-4" title="4"><span class="co"># Run analysis</span></a>
-<a class="sourceLine" id="cb50-5" title="5">fit.ms &lt;-<span class="st"> </span><span class="kw">tree_bd</span>(<span class="dt">phy =</span> primates.phy, <span class="dt">n.tree =</span> <span class="dv">30</span>, <span class="dt">method =</span> <span class="st">&quot;ms&quot;</span>)</a>
-<a class="sourceLine" id="cb50-6" title="6"><span class="co"># Check results</span></a>
-<a class="sourceLine" id="cb50-7" title="7"><span class="kw">summary</span>(fit.ms)</a>
-<a class="sourceLine" id="cb50-8" title="8"><span class="co"># Plot data</span></a>
-<a class="sourceLine" id="cb50-9" title="9"><span class="kw">sensi_plot</span>(fit.ms)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">library</span>(sensiPhy)</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb50-3" data-line-number="3"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
+<a class="sourceLine" id="cb50-4" data-line-number="4"><span class="co"># Run analysis</span></a>
+<a class="sourceLine" id="cb50-5" data-line-number="5">fit.ms &lt;-<span class="st"> </span><span class="kw">tree_bd</span>(<span class="dt">phy =</span> primates.phy, <span class="dt">n.tree =</span> <span class="dv">30</span>, <span class="dt">method =</span> <span class="st">&quot;ms&quot;</span>)</a>
+<a class="sourceLine" id="cb50-6" data-line-number="6"><span class="co"># Check results</span></a>
+<a class="sourceLine" id="cb50-7" data-line-number="7"><span class="kw">summary</span>(fit.ms)</a>
+<a class="sourceLine" id="cb50-8" data-line-number="8"><span class="co"># Plot data</span></a>
+<a class="sourceLine" id="cb50-9" data-line-number="9"><span class="kw">sensi_plot</span>(fit.ms)</a></code></pre></div>
 <p><em>To estimate speciation rate Kendall-Moran method</em></p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb51-2" title="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
-<a class="sourceLine" id="cb51-3" title="3"><span class="co"># Run analysis</span></a>
-<a class="sourceLine" id="cb51-4" title="4">fit.km &lt;-<span class="st"> </span><span class="kw">tree_bd</span>(<span class="dt">phy =</span> primates.phy, <span class="dt">n.tree =</span> <span class="dv">30</span>, <span class="dt">method =</span> <span class="st">&quot;km&quot;</span>)</a>
-<a class="sourceLine" id="cb51-5" title="5"><span class="co"># Check results</span></a>
-<a class="sourceLine" id="cb51-6" title="6"><span class="kw">summary</span>(fit.km)</a>
-<a class="sourceLine" id="cb51-7" title="7"><span class="co"># Plot data</span></a>
-<a class="sourceLine" id="cb51-8" title="8"><span class="kw">sensi_plot</span>(fit.km)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;primates&quot;</span>)</a>
+<a class="sourceLine" id="cb51-3" data-line-number="3"><span class="co"># Run analysis</span></a>
+<a class="sourceLine" id="cb51-4" data-line-number="4">fit.km &lt;-<span class="st"> </span><span class="kw">tree_bd</span>(<span class="dt">phy =</span> primates.phy, <span class="dt">n.tree =</span> <span class="dv">30</span>, <span class="dt">method =</span> <span class="st">&quot;km&quot;</span>)</a>
+<a class="sourceLine" id="cb51-5" data-line-number="5"><span class="co"># Check results</span></a>
+<a class="sourceLine" id="cb51-6" data-line-number="6"><span class="kw">summary</span>(fit.km)</a>
+<a class="sourceLine" id="cb51-7" data-line-number="7"><span class="co"># Plot data</span></a>
+<a class="sourceLine" id="cb51-8" data-line-number="8"><span class="kw">sensi_plot</span>(fit.km)</a></code></pre></div>
 </div>
 </div>
 <div id="using-sensiphy-with-other-packages-caper-phytools-gls" class="section level3">
@@ -830,104 +828,104 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>For instance, if you have used <code>caper</code>, <code>phytools</code> or <code>gls</code> to fit your full models, you can still use <code>sensiPhy</code> to test the sensitivity of those models to multiple types of uncertainty. In order to do this, users will need to set arguments that mirror the specific parameters from their full analysis. For example, to compare results one needs to use the same evolutionary model in pgls (e.g “lambda”, “BM”, etc), or the same metric for phylogenetic signal tests (K or lambda). See below for some examples:</p>
 <div id="pgls-regression" class="section level4">
 <h4>6.1 PGLS regression</h4>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co">### prepare dataset for caper pgls:</span></a>
-<a class="sourceLine" id="cb52-2" title="2"><span class="kw">library</span>(caper)</a>
-<a class="sourceLine" id="cb52-3" title="3"><span class="kw">library</span>(phytools)</a>
-<a class="sourceLine" id="cb52-4" title="4"><span class="kw">library</span>(phylolm)</a>
-<a class="sourceLine" id="cb52-5" title="5"><span class="kw">library</span>(sensiPhy)</a>
-<a class="sourceLine" id="cb52-6" title="6"><span class="co"># selected variables from dataset:</span></a>
-<a class="sourceLine" id="cb52-7" title="7">alien.data &lt;-<span class="st"> </span>alien.data[<span class="kw">c</span>(<span class="st">&quot;gestaLen&quot;</span>, <span class="st">&quot;adultMass&quot;</span>)]</a>
-<a class="sourceLine" id="cb52-8" title="8"></a>
-<a class="sourceLine" id="cb52-9" title="9"><span class="co"># create variable with species names:</span></a>
-<a class="sourceLine" id="cb52-10" title="10">alien.data<span class="op">$</span>sp &lt;-<span class="st"> </span><span class="kw">rownames</span>(alien.data)</a>
-<a class="sourceLine" id="cb52-11" title="11"></a>
-<a class="sourceLine" id="cb52-12" title="12"><span class="co"># caper</span></a>
-<a class="sourceLine" id="cb52-13" title="13"><span class="co"># prepare comparative dataset:</span></a>
-<a class="sourceLine" id="cb52-14" title="14">comp.dat &lt;-<span class="st"> </span><span class="kw">comparative.data</span>(<span class="dt">data =</span> alien.data, <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], </a>
-<a class="sourceLine" id="cb52-15" title="15">                             <span class="dt">names.col =</span> <span class="st">&quot;sp&quot;</span>)</a>
-<a class="sourceLine" id="cb52-16" title="16"><span class="co"># check comparative dataset:</span></a>
-<a class="sourceLine" id="cb52-17" title="17"><span class="kw">print</span>(comp.dat)</a>
-<a class="sourceLine" id="cb52-18" title="18"></a>
-<a class="sourceLine" id="cb52-19" title="19"><span class="co">### Run PGLS analysis (full model)</span></a>
-<a class="sourceLine" id="cb52-20" title="20"><span class="co"># using caper (lambda)</span></a>
-<a class="sourceLine" id="cb52-21" title="21">fit.caper.lam &lt;-<span class="st"> </span><span class="kw">pgls</span>(<span class="kw">log</span>(gestaLen)<span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), comp.dat, <span class="dt">lambda=</span><span class="st">&quot;ML&quot;</span>)</a>
-<a class="sourceLine" id="cb52-22" title="22"><span class="kw">coef</span>(fit.caper.lam)</a>
-<a class="sourceLine" id="cb52-23" title="23"></a>
-<a class="sourceLine" id="cb52-24" title="24"><span class="co"># using caper (delta)</span></a>
-<a class="sourceLine" id="cb52-25" title="25">fit.caper.del &lt;-<span class="st"> </span><span class="kw">pgls</span>(<span class="kw">log</span>(gestaLen)<span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), comp.dat, <span class="dt">delta=</span><span class="st">&quot;ML&quot;</span>)</a>
-<a class="sourceLine" id="cb52-26" title="26"><span class="kw">coef</span>(fit.caper.del)</a>
-<a class="sourceLine" id="cb52-27" title="27"></a>
-<a class="sourceLine" id="cb52-28" title="28"><span class="co"># using phylolm (lambda)</span></a>
-<a class="sourceLine" id="cb52-29" title="29">fit.phylo.lam &lt;-<span class="st"> </span><span class="kw">phylolm</span>(<span class="kw">log</span>(gestaLen)<span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), comp.dat<span class="op">$</span>data, comp.dat<span class="op">$</span>phy,</a>
-<a class="sourceLine" id="cb52-30" title="30">                 <span class="dt">model =</span> <span class="st">&quot;lambda&quot;</span>)</a>
-<a class="sourceLine" id="cb52-31" title="31"><span class="kw">coef</span>(fit.phylo.lam)</a>
-<a class="sourceLine" id="cb52-32" title="32"></a>
-<a class="sourceLine" id="cb52-33" title="33"><span class="co"># using phylolm (del)</span></a>
-<a class="sourceLine" id="cb52-34" title="34">fit.phylo.del &lt;-<span class="st"> </span><span class="kw">phylolm</span>(<span class="kw">log</span>(gestaLen)<span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), comp.dat<span class="op">$</span>data, comp.dat<span class="op">$</span>phy,</a>
-<a class="sourceLine" id="cb52-35" title="35">                         <span class="dt">model =</span> <span class="st">&quot;delta&quot;</span>)</a>
-<a class="sourceLine" id="cb52-36" title="36"><span class="kw">coef</span>(fit.phylo.del)</a>
-<a class="sourceLine" id="cb52-37" title="37"></a>
-<a class="sourceLine" id="cb52-38" title="38"><span class="co">### run sensitivity analysis with sensiPhy (influential species):</span></a>
-<a class="sourceLine" id="cb52-39" title="39"><span class="kw">library</span>(sensiPhy)</a>
-<a class="sourceLine" id="cb52-40" title="40"><span class="co"># run analysis (lambda):</span></a>
-<a class="sourceLine" id="cb52-41" title="41">lam &lt;-<span class="st"> </span><span class="kw">influ_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> comp.dat<span class="op">$</span>phy, </a>
-<a class="sourceLine" id="cb52-42" title="42">                     <span class="dt">data =</span> comp.dat<span class="op">$</span>data, <span class="dt">model =</span> <span class="st">&quot;lambda&quot;</span>)</a>
-<a class="sourceLine" id="cb52-43" title="43"><span class="co"># check full model estimates and compare to initial estimates:</span></a>
-<a class="sourceLine" id="cb52-44" title="44">lam<span class="op">$</span>full.model.estimates</a>
-<a class="sourceLine" id="cb52-45" title="45"><span class="co"># test for influential species:</span></a>
-<a class="sourceLine" id="cb52-46" title="46"><span class="kw">summary</span>(lam)</a>
-<a class="sourceLine" id="cb52-47" title="47"></a>
-<a class="sourceLine" id="cb52-48" title="48"><span class="co"># run analysis (delta):</span></a>
-<a class="sourceLine" id="cb52-49" title="49">del &lt;-<span class="st"> </span><span class="kw">influ_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> comp.dat<span class="op">$</span>phy, </a>
-<a class="sourceLine" id="cb52-50" title="50">                     <span class="dt">data =</span> comp.dat<span class="op">$</span>data, <span class="dt">model =</span> <span class="st">&quot;delta&quot;</span>)</a>
-<a class="sourceLine" id="cb52-51" title="51"><span class="co"># check full model estimates and compare to initial estimates:</span></a>
-<a class="sourceLine" id="cb52-52" title="52">del<span class="op">$</span>full.model.estimates</a>
-<a class="sourceLine" id="cb52-53" title="53"><span class="co"># test for influential species:</span></a>
-<a class="sourceLine" id="cb52-54" title="54"><span class="kw">summary</span>(del)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co">### prepare dataset for caper pgls:</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="kw">library</span>(caper)</a>
+<a class="sourceLine" id="cb52-3" data-line-number="3"><span class="kw">library</span>(phytools)</a>
+<a class="sourceLine" id="cb52-4" data-line-number="4"><span class="kw">library</span>(phylolm)</a>
+<a class="sourceLine" id="cb52-5" data-line-number="5"><span class="kw">library</span>(sensiPhy)</a>
+<a class="sourceLine" id="cb52-6" data-line-number="6"><span class="co"># selected variables from dataset:</span></a>
+<a class="sourceLine" id="cb52-7" data-line-number="7">alien.data &lt;-<span class="st"> </span>alien.data[<span class="kw">c</span>(<span class="st">&quot;gestaLen&quot;</span>, <span class="st">&quot;adultMass&quot;</span>)]</a>
+<a class="sourceLine" id="cb52-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb52-9" data-line-number="9"><span class="co"># create variable with species names:</span></a>
+<a class="sourceLine" id="cb52-10" data-line-number="10">alien.data<span class="op">$</span>sp &lt;-<span class="st"> </span><span class="kw">rownames</span>(alien.data)</a>
+<a class="sourceLine" id="cb52-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb52-12" data-line-number="12"><span class="co"># caper</span></a>
+<a class="sourceLine" id="cb52-13" data-line-number="13"><span class="co"># prepare comparative dataset:</span></a>
+<a class="sourceLine" id="cb52-14" data-line-number="14">comp.dat &lt;-<span class="st"> </span><span class="kw">comparative.data</span>(<span class="dt">data =</span> alien.data, <span class="dt">phy =</span> alien.phy[[<span class="dv">1</span>]], </a>
+<a class="sourceLine" id="cb52-15" data-line-number="15">                             <span class="dt">names.col =</span> <span class="st">&quot;sp&quot;</span>)</a>
+<a class="sourceLine" id="cb52-16" data-line-number="16"><span class="co"># check comparative dataset:</span></a>
+<a class="sourceLine" id="cb52-17" data-line-number="17"><span class="kw">print</span>(comp.dat)</a>
+<a class="sourceLine" id="cb52-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb52-19" data-line-number="19"><span class="co">### Run PGLS analysis (full model)</span></a>
+<a class="sourceLine" id="cb52-20" data-line-number="20"><span class="co"># using caper (lambda)</span></a>
+<a class="sourceLine" id="cb52-21" data-line-number="21">fit.caper.lam &lt;-<span class="st"> </span><span class="kw">pgls</span>(<span class="kw">log</span>(gestaLen)<span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), comp.dat, <span class="dt">lambda=</span><span class="st">&quot;ML&quot;</span>)</a>
+<a class="sourceLine" id="cb52-22" data-line-number="22"><span class="kw">coef</span>(fit.caper.lam)</a>
+<a class="sourceLine" id="cb52-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb52-24" data-line-number="24"><span class="co"># using caper (delta)</span></a>
+<a class="sourceLine" id="cb52-25" data-line-number="25">fit.caper.del &lt;-<span class="st"> </span><span class="kw">pgls</span>(<span class="kw">log</span>(gestaLen)<span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), comp.dat, <span class="dt">delta=</span><span class="st">&quot;ML&quot;</span>)</a>
+<a class="sourceLine" id="cb52-26" data-line-number="26"><span class="kw">coef</span>(fit.caper.del)</a>
+<a class="sourceLine" id="cb52-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb52-28" data-line-number="28"><span class="co"># using phylolm (lambda)</span></a>
+<a class="sourceLine" id="cb52-29" data-line-number="29">fit.phylo.lam &lt;-<span class="st"> </span><span class="kw">phylolm</span>(<span class="kw">log</span>(gestaLen)<span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), comp.dat<span class="op">$</span>data, comp.dat<span class="op">$</span>phy,</a>
+<a class="sourceLine" id="cb52-30" data-line-number="30">                 <span class="dt">model =</span> <span class="st">&quot;lambda&quot;</span>)</a>
+<a class="sourceLine" id="cb52-31" data-line-number="31"><span class="kw">coef</span>(fit.phylo.lam)</a>
+<a class="sourceLine" id="cb52-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb52-33" data-line-number="33"><span class="co"># using phylolm (del)</span></a>
+<a class="sourceLine" id="cb52-34" data-line-number="34">fit.phylo.del &lt;-<span class="st"> </span><span class="kw">phylolm</span>(<span class="kw">log</span>(gestaLen)<span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), comp.dat<span class="op">$</span>data, comp.dat<span class="op">$</span>phy,</a>
+<a class="sourceLine" id="cb52-35" data-line-number="35">                         <span class="dt">model =</span> <span class="st">&quot;delta&quot;</span>)</a>
+<a class="sourceLine" id="cb52-36" data-line-number="36"><span class="kw">coef</span>(fit.phylo.del)</a>
+<a class="sourceLine" id="cb52-37" data-line-number="37"></a>
+<a class="sourceLine" id="cb52-38" data-line-number="38"><span class="co">### run sensitivity analysis with sensiPhy (influential species):</span></a>
+<a class="sourceLine" id="cb52-39" data-line-number="39"><span class="kw">library</span>(sensiPhy)</a>
+<a class="sourceLine" id="cb52-40" data-line-number="40"><span class="co"># run analysis (lambda):</span></a>
+<a class="sourceLine" id="cb52-41" data-line-number="41">lam &lt;-<span class="st"> </span><span class="kw">influ_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> comp.dat<span class="op">$</span>phy, </a>
+<a class="sourceLine" id="cb52-42" data-line-number="42">                     <span class="dt">data =</span> comp.dat<span class="op">$</span>data, <span class="dt">model =</span> <span class="st">&quot;lambda&quot;</span>)</a>
+<a class="sourceLine" id="cb52-43" data-line-number="43"><span class="co"># check full model estimates and compare to initial estimates:</span></a>
+<a class="sourceLine" id="cb52-44" data-line-number="44">lam<span class="op">$</span>full.model.estimates</a>
+<a class="sourceLine" id="cb52-45" data-line-number="45"><span class="co"># test for influential species:</span></a>
+<a class="sourceLine" id="cb52-46" data-line-number="46"><span class="kw">summary</span>(lam)</a>
+<a class="sourceLine" id="cb52-47" data-line-number="47"></a>
+<a class="sourceLine" id="cb52-48" data-line-number="48"><span class="co"># run analysis (delta):</span></a>
+<a class="sourceLine" id="cb52-49" data-line-number="49">del &lt;-<span class="st"> </span><span class="kw">influ_phylm</span>(<span class="kw">log</span>(gestaLen) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(adultMass), <span class="dt">phy =</span> comp.dat<span class="op">$</span>phy, </a>
+<a class="sourceLine" id="cb52-50" data-line-number="50">                     <span class="dt">data =</span> comp.dat<span class="op">$</span>data, <span class="dt">model =</span> <span class="st">&quot;delta&quot;</span>)</a>
+<a class="sourceLine" id="cb52-51" data-line-number="51"><span class="co"># check full model estimates and compare to initial estimates:</span></a>
+<a class="sourceLine" id="cb52-52" data-line-number="52">del<span class="op">$</span>full.model.estimates</a>
+<a class="sourceLine" id="cb52-53" data-line-number="53"><span class="co"># test for influential species:</span></a>
+<a class="sourceLine" id="cb52-54" data-line-number="54"><span class="kw">summary</span>(del)</a></code></pre></div>
 </div>
 <div id="phylogenetic-signal" class="section level4">
 <h4>6.2 phylogenetic signal</h4>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="co"># 2. phylogenetic signal:-------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb53-2" title="2"><span class="kw">library</span>(picante)</a>
-<a class="sourceLine" id="cb53-3" title="3"><span class="kw">library</span>(phytools)</a>
-<a class="sourceLine" id="cb53-4" title="4"><span class="kw">library</span>(sensiPhy)</a>
-<a class="sourceLine" id="cb53-5" title="5"></a>
-<a class="sourceLine" id="cb53-6" title="6"><span class="co">### Estimate phylogenetic signal:</span></a>
-<a class="sourceLine" id="cb53-7" title="7"><span class="co"># using picante (K)</span></a>
-<a class="sourceLine" id="cb53-8" title="8"><span class="kw">phylosignal</span>(<span class="kw">log</span>(comp.dat<span class="op">$</span>data<span class="op">$</span>adultMass), comp.dat<span class="op">$</span>phy, <span class="dt">reps =</span> <span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb53-9" title="9"></a>
-<a class="sourceLine" id="cb53-10" title="10"><span class="co"># using phytools (K):</span></a>
-<a class="sourceLine" id="cb53-11" title="11">phytools<span class="op">::</span><span class="kw">phylosig</span>(<span class="dt">x =</span> <span class="kw">log</span>(comp.dat<span class="op">$</span>data<span class="op">$</span>adultMass), <span class="dt">tree =</span> comp.dat<span class="op">$</span>phy, </a>
-<a class="sourceLine" id="cb53-12" title="12">                   <span class="dt">nsim =</span> <span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb53-13" title="13">                   <span class="dt">method =</span> <span class="st">&quot;K&quot;</span>, <span class="dt">test =</span> T)</a>
-<a class="sourceLine" id="cb53-14" title="14"></a>
-<a class="sourceLine" id="cb53-15" title="15"><span class="co"># using phytools (lambda):</span></a>
-<a class="sourceLine" id="cb53-16" title="16">phytools<span class="op">::</span><span class="kw">phylosig</span>(<span class="dt">x =</span> <span class="kw">log</span>(comp.dat<span class="op">$</span>data<span class="op">$</span>adultMass), <span class="dt">tree =</span> comp.dat<span class="op">$</span>phy, </a>
-<a class="sourceLine" id="cb53-17" title="17">                   <span class="dt">nsim =</span> <span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb53-18" title="18">                   <span class="dt">method =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">test =</span> T)</a>
-<a class="sourceLine" id="cb53-19" title="19"></a>
-<a class="sourceLine" id="cb53-20" title="20"><span class="co">### run sensitivity analysis with sensiPhy (influential species):</span></a>
-<a class="sourceLine" id="cb53-21" title="21"><span class="kw">library</span>(sensiPhy)</a>
-<a class="sourceLine" id="cb53-22" title="22"><span class="co"># Load data:</span></a>
-<a class="sourceLine" id="cb53-23" title="23"><span class="kw">data</span>(alien)</a>
-<a class="sourceLine" id="cb53-24" title="24"><span class="co"># Logtransform data</span></a>
-<a class="sourceLine" id="cb53-25" title="25">comp.dat<span class="op">$</span>data<span class="op">$</span>logMass &lt;-<span class="st"> </span><span class="kw">log</span>(comp.dat<span class="op">$</span>data<span class="op">$</span>adultMass) </a>
-<a class="sourceLine" id="cb53-26" title="26"></a>
-<a class="sourceLine" id="cb53-27" title="27"><span class="co"># Run sensitivity analysis (K):</span></a>
-<a class="sourceLine" id="cb53-28" title="28">influ.k &lt;-<span class="st"> </span><span class="kw">influ_physig</span>(<span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> comp.dat<span class="op">$</span>data, <span class="dt">phy =</span> comp.dat<span class="op">$</span>phy, </a>
-<a class="sourceLine" id="cb53-29" title="29">                      <span class="dt">method =</span> <span class="st">&quot;K&quot;</span>)</a>
-<a class="sourceLine" id="cb53-30" title="30"><span class="co"># check full model estimates and compare to initial estimates:</span></a>
-<a class="sourceLine" id="cb53-31" title="31">influ.k<span class="op">$</span>full.data.estimates</a>
-<a class="sourceLine" id="cb53-32" title="32"><span class="co"># check for influential species:</span></a>
-<a class="sourceLine" id="cb53-33" title="33"><span class="kw">summary</span>(influ.k)</a>
-<a class="sourceLine" id="cb53-34" title="34"></a>
-<a class="sourceLine" id="cb53-35" title="35"><span class="co"># Run sensitivity analysis (lambda):</span></a>
-<a class="sourceLine" id="cb53-36" title="36">influ.lam &lt;-<span class="st"> </span><span class="kw">influ_physig</span>(<span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> comp.dat<span class="op">$</span>data, <span class="dt">phy =</span> comp.dat<span class="op">$</span>phy, </a>
-<a class="sourceLine" id="cb53-37" title="37">                      <span class="dt">method =</span> <span class="st">&quot;lambda&quot;</span>)</a>
-<a class="sourceLine" id="cb53-38" title="38"><span class="co"># check full model estimates and compare to initial estimates:</span></a>
-<a class="sourceLine" id="cb53-39" title="39">influ.lam<span class="op">$</span>full.data.estimates</a>
-<a class="sourceLine" id="cb53-40" title="40"><span class="co"># check for influential species:</span></a>
-<a class="sourceLine" id="cb53-41" title="41"><span class="kw">summary</span>(influ.lam)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co"># 2. phylogenetic signal:-------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="kw">library</span>(picante)</a>
+<a class="sourceLine" id="cb53-3" data-line-number="3"><span class="kw">library</span>(phytools)</a>
+<a class="sourceLine" id="cb53-4" data-line-number="4"><span class="kw">library</span>(sensiPhy)</a>
+<a class="sourceLine" id="cb53-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb53-6" data-line-number="6"><span class="co">### Estimate phylogenetic signal:</span></a>
+<a class="sourceLine" id="cb53-7" data-line-number="7"><span class="co"># using picante (K)</span></a>
+<a class="sourceLine" id="cb53-8" data-line-number="8"><span class="kw">phylosignal</span>(<span class="kw">log</span>(comp.dat<span class="op">$</span>data<span class="op">$</span>adultMass), comp.dat<span class="op">$</span>phy, <span class="dt">reps =</span> <span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb53-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb53-10" data-line-number="10"><span class="co"># using phytools (K):</span></a>
+<a class="sourceLine" id="cb53-11" data-line-number="11">phytools<span class="op">::</span><span class="kw">phylosig</span>(<span class="dt">x =</span> <span class="kw">log</span>(comp.dat<span class="op">$</span>data<span class="op">$</span>adultMass), <span class="dt">tree =</span> comp.dat<span class="op">$</span>phy, </a>
+<a class="sourceLine" id="cb53-12" data-line-number="12">                   <span class="dt">nsim =</span> <span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb53-13" data-line-number="13">                   <span class="dt">method =</span> <span class="st">&quot;K&quot;</span>, <span class="dt">test =</span> T)</a>
+<a class="sourceLine" id="cb53-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb53-15" data-line-number="15"><span class="co"># using phytools (lambda):</span></a>
+<a class="sourceLine" id="cb53-16" data-line-number="16">phytools<span class="op">::</span><span class="kw">phylosig</span>(<span class="dt">x =</span> <span class="kw">log</span>(comp.dat<span class="op">$</span>data<span class="op">$</span>adultMass), <span class="dt">tree =</span> comp.dat<span class="op">$</span>phy, </a>
+<a class="sourceLine" id="cb53-17" data-line-number="17">                   <span class="dt">nsim =</span> <span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb53-18" data-line-number="18">                   <span class="dt">method =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">test =</span> T)</a>
+<a class="sourceLine" id="cb53-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb53-20" data-line-number="20"><span class="co">### run sensitivity analysis with sensiPhy (influential species):</span></a>
+<a class="sourceLine" id="cb53-21" data-line-number="21"><span class="kw">library</span>(sensiPhy)</a>
+<a class="sourceLine" id="cb53-22" data-line-number="22"><span class="co"># Load data:</span></a>
+<a class="sourceLine" id="cb53-23" data-line-number="23"><span class="kw">data</span>(alien)</a>
+<a class="sourceLine" id="cb53-24" data-line-number="24"><span class="co"># Logtransform data</span></a>
+<a class="sourceLine" id="cb53-25" data-line-number="25">comp.dat<span class="op">$</span>data<span class="op">$</span>logMass &lt;-<span class="st"> </span><span class="kw">log</span>(comp.dat<span class="op">$</span>data<span class="op">$</span>adultMass) </a>
+<a class="sourceLine" id="cb53-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb53-27" data-line-number="27"><span class="co"># Run sensitivity analysis (K):</span></a>
+<a class="sourceLine" id="cb53-28" data-line-number="28">influ.k &lt;-<span class="st"> </span><span class="kw">influ_physig</span>(<span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> comp.dat<span class="op">$</span>data, <span class="dt">phy =</span> comp.dat<span class="op">$</span>phy, </a>
+<a class="sourceLine" id="cb53-29" data-line-number="29">                      <span class="dt">method =</span> <span class="st">&quot;K&quot;</span>)</a>
+<a class="sourceLine" id="cb53-30" data-line-number="30"><span class="co"># check full model estimates and compare to initial estimates:</span></a>
+<a class="sourceLine" id="cb53-31" data-line-number="31">influ.k<span class="op">$</span>full.data.estimates</a>
+<a class="sourceLine" id="cb53-32" data-line-number="32"><span class="co"># check for influential species:</span></a>
+<a class="sourceLine" id="cb53-33" data-line-number="33"><span class="kw">summary</span>(influ.k)</a>
+<a class="sourceLine" id="cb53-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb53-35" data-line-number="35"><span class="co"># Run sensitivity analysis (lambda):</span></a>
+<a class="sourceLine" id="cb53-36" data-line-number="36">influ.lam &lt;-<span class="st"> </span><span class="kw">influ_physig</span>(<span class="st">&quot;logMass&quot;</span>, <span class="dt">data =</span> comp.dat<span class="op">$</span>data, <span class="dt">phy =</span> comp.dat<span class="op">$</span>phy, </a>
+<a class="sourceLine" id="cb53-37" data-line-number="37">                      <span class="dt">method =</span> <span class="st">&quot;lambda&quot;</span>)</a>
+<a class="sourceLine" id="cb53-38" data-line-number="38"><span class="co"># check full model estimates and compare to initial estimates:</span></a>
+<a class="sourceLine" id="cb53-39" data-line-number="39">influ.lam<span class="op">$</span>full.data.estimates</a>
+<a class="sourceLine" id="cb53-40" data-line-number="40"><span class="co"># check for influential species:</span></a>
+<a class="sourceLine" id="cb53-41" data-line-number="41"><span class="kw">summary</span>(influ.lam)</a></code></pre></div>
 </div>
 </div>
 <div id="how-long-does-it-take" class="section level3">
@@ -1090,7 +1088,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <ol style="list-style-type: decimal">
 <li>Fork it (<a href="https://github.com/paternogbc/sensiPhy/fork" class="uri">https://github.com/paternogbc/sensiPhy/fork</a>)</li>
 <li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
-<li>Commit your changes (<code>git commit -am &#39;Add some feature&#39;</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
 <li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
 <li>Create a new Pull Request</li>
 </ol>

@@ -1,11 +1,11 @@
-9a905df9f79375fc5c55c0f3dd01f03e *DESCRIPTION
+e06077a015100d0751358cc3c3bf6b46 *DESCRIPTION
 3e0a5ea6a6b6b3355a319a520607fa43 *NAMESPACE
-9c2bd9bac5b21aab6a68c49fb6a2939e *NEWS.md
+201b347ac1d1c4945d68116a3257b356 *NEWS.md
 14ab5e6154c269bfb2bc1b4d5f9dd4d0 *R/clade_Discrete.R
 705160ba25441a80b2fb2f85db18c355 *R/clade_continuous.R
 4e6c895019f7f20ddb718f1b249781d5 *R/clade_phyglm.R
 e5d763de6a3b57bf45ee78517f8a3f08 *R/clade_phylm.R
-7a1911dd300a26b6babd47bbfbb25a94 *R/clade_physig.R
+ab437d2501736c9993a6e91203bad25d *R/clade_physig.R
 d85190e4d23251c8a6f9bf711b5507ff *R/document-data.R
 303e39d6f395de1bd44702417714c0ba *R/influ_Discrete.R
 13981bf1f498f438883a61b2e7f00313 *R/influ_continuous.R
@@ -24,7 +24,7 @@ cb4bf0e5a64c48471bdec5c86dcca822 *R/intra_phylm.R
 671cf786d2269f6207d776611e280524 *R/match_dataphy.R
 fa84f80d1d40bde74786a117ad64f629 *R/miss.phylo.d.R
 c7b477d96c42a6cdbb8524f3fb272c4f *R/print_methods.R
-c28aa5198c16706427bf163f36df5753 *R/samp_Discrete.R
+4f97a4a75faf636540aa3c1d966f8b9a *R/samp_Discrete.R
 33497e6367c32f9e9dbf119748d1478c *R/samp_continuous.R
 0630d3ea68c5b8a63d5842fc12d73610 *R/samp_phyglm.R
 68ae3c97a224a89d294e44609928c32b *R/samp_phylm.R
@@ -43,7 +43,7 @@ d0f8f28626c62823909025a92ff6bc1f *R/sensi_plot.sensiClade.R
 959a3bf2d9129d28d70b1339e435d34c *R/sensi_plot.sensiSamp.R
 481c97e8946b3201a4f802c7de905df0 *R/sensi_plot.tree.bd.R
 5ab75eaaad1d876559ad99c6106f8f00 *R/sensi_plot.tree.physig.R
-6ef010496582db30952d5316bb0edfeb *R/summary_methods.R
+be37508c086f8bdbd7a347858cb36692 *R/summary_methods.R
 60cc52d87f1f701d75a1df25ee73502e *R/tree_Discrete.R
 46affbe0f3a8cdaf42de53758a8d1888 *R/tree_bd.R
 b293a1240fe74b2df18245376146d0bd *R/tree_clade_phyglm.R
@@ -60,7 +60,7 @@ ff8c3108ef3db1b1fdd955857c4a5923 *R/tree_phylm.R
 939277b4b83c166acfb468ed71eec370 *R/tree_samp_phylm.R
 1a9739e9143103e0cde0219b18d01431 *R/utils_internal.R
 e59620646a453194b6c927176f49284a *R/utils_plot.R
-2aeeb559d14d01e1f82a288316796177 *build/vignette.rds
+3fafc4e9daecebaca12ddaf660f9cc46 *build/vignette.rds
 0d275bf1e2aef4d76746b84eb9a9b6fd *data/alien.data.rda
 30f9abf7a5922335688b065a2e56726a *data/alien.phy.rda
 ba535a803d9ba7c85a4a26d1970f4f3d *data/alien.rda
@@ -70,7 +70,7 @@ ba535a803d9ba7c85a4a26d1970f4f3d *data/alien.rda
 621578ef75ec46677456d3be04660c48 *inst/CITATION
 b9dbf364b4ccf089ac569223ccf56d38 *inst/doc/sensiPhy_vignette.R
 a19afe2fdff1c0cba5c70c0544db73c2 *inst/doc/sensiPhy_vignette.Rmd
-2ced36aed88d7415c3c4796bf8179989 *inst/doc/sensiPhy_vignette.html
+bf96c0b621aec5120a932c8955400ecc *inst/doc/sensiPhy_vignette.html
 f018b6f9220f97ca2edcf4dfd0c8fa60 *man/alien.Rd
 003faedcc20ca22a0802bfe09a15f8ed *man/alien.data.Rd
 7c91fb8c663c154410c4d82798802563 *man/alien.phy.Rd
@@ -91,7 +91,7 @@ a7febc542a38c8fdf66324ab05eb7e5e *man/intra_clade_phylm.Rd
 237637e77c058a2db71a584e6328b39a *man/intra_phyglm.Rd
 47e66672d8349c70b960a376b1d15fa5 *man/intra_phylm.Rd
 8485416ae73c4ba79c12d997378417d2 *man/intra_physig.Rd
-2ae2bd0b47b55fd354924bcd2c76e300 *man/intra_samp_phyglm.Rd
+39e4abdebe68c7e8fd7916a48279557c *man/intra_samp_phyglm.Rd
 ce4692b108bb207e9641e70bb4f3fc0c *man/intra_samp_phylm.Rd
 57b4fc14b91f21e94dd161587cab0d16 *man/match_dataphy.Rd
 c629c3662c5ccbe5fc1d3cf1745e7e47 *man/miss.phylo.d.Rd
@@ -99,7 +99,7 @@ bda1153fdc5ab869dbd1e8053b9b2347 *man/primates.Rd
 124761a3c6565b8a0eeecdcf7f44ae1c *man/primates.data.Rd
 247e50092aa38bf2e9fe571e5dfe8c45 *man/primates.phy.Rd
 f8b5662a73feee095a8892f419b4e981 *man/samp_continuous.Rd
-e0cc7f8b5513868a3b98aa1371a8ffcd *man/samp_discrete.Rd
+0deb6e82db44b7ccbc1d735e19c05727 *man/samp_discrete.Rd
 6b53684df43ed19fe4278ed5cc633f95 *man/samp_phyglm.Rd
 9dc997b29212d2d0578255b1d8923635 *man/samp_phylm.Rd
 ddfb0f14b44c6848e788669f014a4c2c *man/samp_physig.Rd
